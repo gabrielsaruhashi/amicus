@@ -1,0 +1,23 @@
+<% include ./partials/header.ejs %>
+
+  <section id="signup" class="box special">
+    <header class="major">
+      <h2>Login</h2>
+    </header>
+
+    <div class="col-sm-6 offset-sm-3">
+      <form class="login" action="/user/login" method="POST">
+        <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+          <div class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></div>
+          <input class="form-control" name="email" id="email" type="text" placeholder="email">
+        </div>
+        <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+          <div class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></div>
+          <input class="form-control" name="password" id="password" type="text" placeholder="password">
+        </div>
+        <input type="submit" class="log-in-submit btn btn-primary">
+      </form>
+    </div>
+  </section>
+
+<% include ./partials/footer.ejs %>
