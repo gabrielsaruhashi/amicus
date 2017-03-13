@@ -1,102 +1,103 @@
 <% include ./partials/header.ejs %>
 
-		<!-- Title Banner -->
-			<section id="banner">
-				<h2>to-be-updated</h2>
-				<p>A matchmaking app for social activities</p>
-				<ul class="actions">
-					<li><a href="#" class="button special">Sign Up</a></li>
-					<li><a href="#main" class="button">Learn More</a></li>
-				</ul>
-			</section>
+	<!-- Title Banner -->
+	<section id="banner">
+		<h2>to-be-updated</h2>
+		<p>A matchmaking app for social activities</p>
+		<ul class="actions">
+			<li><a href="#signup" class="button special">Sign Up</a></li>
+			<li><a href="#introduction" class="button">Learn More</a></li>
+		</ul>
+	</section>
 
-		<!-- Main -->
-			<section id="main" class="container">
+	<!-- Main -->
+	<section id="main" class="container">
 
-				<section class="box special">
-					<header class="major">
-						<h2>Introducing the ultimate app
-						<br />
-						for getting the most out of your free time</h2>
-						<p>Know what your friends are doing. Post whatever you feel like doing<br />
-						and connect with people who are interested in doing the same.</p>
-					</header>
-					<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
-				</section>
+		<section id="signup" class="box special">
+			<header class="major">
+				<h2>Sign Up</h2>
+				<% if (signupMessage.length > 0) { %>
+					<%= signupMessage %></div>
+				<% } %>
+			</header>
 
-				<section class="box special features">
-					<div class="features-row">
-						<section>
-							<span class="icon major fa-futbol-o accent2"></span>
-							<h3>Sports</h3>
-							<p>Interested in playing sports with people who play just like you? Pick-up Basketball, Soccer, Pool and Chess matches divided by players' ability.</p>
-						</section>
-						<section>
-							<span class="icon major fa-book accent3"></span>
-							<h3>Study Groups</h3>
-							<p>Do you have a CS midterm coming up and are you looking for people to study together? Group studies divided by subjects and learning styles</p>
-						</section>
-					</div>
-					<div class="features-row">
-						<section>
-							<span class="icon major fa-film accent4"></span>
-							<h3>Cultural Events</h3>
-							<p>Staying on campus during a break and looking for people to watch a movie or go to the theater together? See who's up for a cultural event.</p>
-						</section>
-						<section>
-							<span class="icon major fa-code accent5"></span>
-							<h3>Project Groups</h3>
-							<p>Do you have a great idea for an app or are you looking for people to discuss a Business case? See who's also looking for help with projects</p>
-						</section>
-					</div>
-				</section>
-				<!--
-				<div class="row">
-					<div class="6u 12u(narrower)">
-
-						<section class="box special">
-							<span class="image featured"><img src="images/pic02.jpg" alt="" /></span>
-							<h3>Sed lorem adipiscing</h3>
-							<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							<ul class="actions">
-								<li><a href="#" class="button alt">Learn More</a></li>
-							</ul>
-						</section>
-
-					</div>
-					<div class="6u 12u(narrower)">
-
-						<section class="box special">
-							<span class="image featured"><img src="images/pic03.jpg" alt="" /></span>
-							<h3>Accumsan integer</h3>
-							<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							<ul class="actions">
-								<li><a href="#" class="button alt">Learn More</a></li>
-							</ul>
-						</section>
-
-					</div>
+			<form action="/signup" method="post">
+				<div class="form-group">
+					<label>Your Name</label>
+					<input type="text" class="form-control text-input" name="name">
 				</div>
+				<div class="form-group">
+					<label>Email</label>
+					<input type="text" class="form-control text-input" name="email">
+				</div>
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" class="form-control text-input" name="password">
+				</div>
+				<div class="form-group">
+					<label>Password Confirmation</label>
+					<input type="password" class="form-control text-input" name="passwordConfirmation">
+				</div>
+				<input type="submit" class="sign-up-submit">
+			</form>
 
-			</section>
-			-->
-		<!-- CTA -->
-			<section id="cta">
+		</section>
 
-				<h2>Sign up for our newsletter</h2>
-				<p>Be the first to know about updates, new functionalities and what our dev team is working on.</p>
+		<section id="introduction" class="box special">
+			<header class="major">
+				<h2>Introducing the ultimate app
+				<br />
+				for getting the most out of your free time</h2>
+				<p>Know what your friends are doing. Post whatever you feel like doing<br />
+				and connect with people who are interested in doing the same.</p>
+			</header>
+			<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
+		</section>
 
-				<form>
-					<div class="row uniform 50%">
-						<div class="8u 12u(mobilep)">
-							<input type="email" name="email" id="email" placeholder="Email Address" />
-						</div>
-						<div class="4u 12u(mobilep)">
-							<input type="submit" value="Sign Up" class="fit" />
-						</div>
-					</div>
-				</form>
+		<section class="box special features">
+			<div class="features-row">
+				<section>
+					<span class="icon major fa-futbol-o accent2"></span>
+					<h3>Sports</h3>
+					<p>Interested in playing sports with people who play just like you? Pick-up Basketball, Soccer, Pool and Chess matches divided by players' ability.</p>
+				</section>
+				<section>
+					<span class="icon major fa-book accent3"></span>
+					<h3>Study Groups</h3>
+					<p>Do you have a CS midterm coming up and are you looking for people to study together? Group studies divided by subjects and learning styles</p>
+				</section>
+			</div>
+			<div class="features-row">
+				<section>
+					<span class="icon major fa-film accent4"></span>
+					<h3>Cultural Events</h3>
+					<p>Staying on campus during a break and looking for people to watch a movie or go to the theater together? See who's up for a cultural event.</p>
+				</section>
+				<section>
+					<span class="icon major fa-code accent5"></span>
+					<h3>Project Groups</h3>
+					<p>Do you have a great idea for an app or are you looking for people to discuss a Business case? See who's also looking for help with projects</p>
+				</section>
+			</div>
+		</section>
 
-			</section>
+	<!-- CTA -->
+	<section id="cta">
+
+		<h2>Sign up for our newsletter</h2>
+		<p>Be the first to know about updates, new functionalities and what our dev team is working on.</p>
+
+		<form>
+			<div class="row uniform 50%">
+				<div class="8u 12u(mobilep)">
+					<input type="email" name="email" id="email" placeholder="Email Address" />
+				</div>
+				<div class="4u 12u(mobilep)">
+					<input type="submit" value="Sign Up" class="fit" />
+				</div>
+			</div>
+		</form>
+
+	</section>
 
 <% include ./partials/footer.ejs %>
