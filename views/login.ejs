@@ -6,7 +6,12 @@
     </header>
 
     <div class="col-sm-6 offset-sm-3">
-      <form class="login" action="/user/login" method="POST">
+      <% if (locals.errors) { %>
+        <div class="alert alert-danger" role="alert">
+          <%=locals.errors%>
+        </div>
+      <% } %>
+      <form class="login" action="/login" method="POST">
         <div class="input-group mb-2 mr-sm-2 mb-sm-2">
           <div class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></div>
           <input class="form-control" name="email" id="email" type="text" placeholder="email">

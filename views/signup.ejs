@@ -5,7 +5,12 @@
       <h2>Sign Up</h2>
     </header>
     <div class="col-sm-6 offset-sm-3">
-      <form class="register" action="/user/register" method="POST" class="signup-form">
+      <% if (locals.errors) { %>
+        <div class="alert alert-danger" role="alert">
+          <%=locals.errors%>
+        </div>
+      <% } %>
+      <form class="signup" action="/signup" method="POST" class="signup-form">
         <div class="input-group mb-2 mr-sm-2 mb-sm-2">
           <div class="input-group-addon"><i class="fa fa-heart" aria-hidden="true"></i></div>
           <input name="name" type="text" class="text-input form-control" placeholder="first and last name">
