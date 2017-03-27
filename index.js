@@ -28,7 +28,7 @@ const server = app.listen(port, host, function () {
   );
 });
 app.get('/newevent', function (req, res) {
-  res.render('newevent.ejs');
+  res.render('createevent.ejs');
 });
 
 app.post('/newevent', function (req, res) {
