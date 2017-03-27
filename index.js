@@ -24,3 +24,7 @@ const server = app.listen(port, host, function () {
     server.address().port
   );
 });
+
+app.get('/newevent', function (req, res) {
+  res.render('newevent.ejs');
+});
