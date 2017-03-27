@@ -4,6 +4,9 @@
 const express = require('express');
 const config = require('./config/config.js');
 
+// require controller
+var createEventController = require('./controllers/createEventController.js');
+
 // setup app
 const app = express();
 const host = process.env.IP || '0.0.0.0';
@@ -28,3 +31,5 @@ const server = app.listen(port, host, function () {
 app.get('/newevent', function (req, res) {
   res.render('newevent.ejs');
 });
+
+app.post('/newevent', createEventController.executeCreateEvent);
