@@ -5,6 +5,7 @@ function executeCreateEvent(callback) {
 }
 
 
+
 model.export = {
-  executeCreateEvent = executeCreateEvent;
+  executeCreateEvent : executeCreateEvent
 }

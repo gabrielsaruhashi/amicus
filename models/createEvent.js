@@ -1,17 +1,24 @@
+const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoose = require('mongoose');
 
-const Events = require('./models/events.js');
+const Events = require('../config/models/events.js');
 // connect to database
-const configDB = require('./database.js');
-mongoose.connect(configDB.url); // connect to our database
+const configDB = require('../config/database.js');
+
 
 const store = new MongoDBStore({
   uri: configDB.url,
-  collection: 'events',
+  collection: 'sessions',
 });
 
-function CreateEvent(callback){
+function isLoggedIn(req, res, next) {
+	if(res.locals.currentUser) {
+		next();
+	}
+}
+
+function createEvent(self) {
   const newEvent = new Events();
   newEvent.event_name = req.body.event_name;
   newEvent.event_type = req.body.event_type;
@@ -27,9 +34,10 @@ function CreateEvent(callback){
       res.redirect('/');
       return;
     }
-  }
+  })
 }
 
+
 module.exports = {
-  createEvent: CreateEvent
+  createEvent: createEvent
 };

@@ -32,4 +32,22 @@ app.get('/newevent', function (req, res) {
   res.render('newevent.ejs');
 });
 
-app.post('/newevent', createEventController.executeCreateEvent);
+app.post('/newevent', function (req, res) {
+  const newEvent = new Events();
+  newEvent.event_name = req.body.event_name;
+  newEvent.event_type = req.body.event_type;
+  newEvent.day = req.body.day;
+  newEvent.place = req.body.place;
+  newEvent.place = req.body.time;
+
+
+  newEvent.save(function(err, user){
+
+    if(user && !err){
+      req.session.userId = user._id;
+      res.redirect('/');
+      return;
+    }
+  })
+
+});
