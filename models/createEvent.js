@@ -7,10 +7,6 @@ const Events = require('../config/models/events.js');
 const configDB = require('../config/database.js');
 
 
-const store = new MongoDBStore({
-  uri: configDB.url,
-  collection: 'sessions',
-});
 
 function isLoggedIn(req, res, next) {
 	if(res.locals.currentUser) {
@@ -18,7 +14,9 @@ function isLoggedIn(req, res, next) {
 	}
 }
 
-function createEvent(self) {
+function createEvent(req, res, next) {
+  console.log('hello');
+  debugger;
   const newEvent = new Events();
   newEvent.event_name = req.body.event_name;
   newEvent.event_type = req.body.event_type;

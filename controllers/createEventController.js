@@ -1,11 +1,11 @@
 var model  = require('../models/createEvent.js');
 
-function executeCreateEvent(callback) {
-  model.createEvent;
+function executeCreateEvent(req,res, next) {
+  model.createEvent(req, res, next);
 }
 
 
 
-model.export = {
+module.exports = {
   executeCreateEvent : executeCreateEvent
 }
