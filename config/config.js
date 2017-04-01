@@ -11,7 +11,7 @@ mongoose.connect(configDB.url); // connect to our database
 // require models
 const Event = require('./models/event.js');
 
-function loadUserEvents(req, res, next) {
+function loadAllEvents(req, res, next) {
   if(!res.locals.user) {
     return next();
   }
@@ -48,7 +48,7 @@ module.exports = function (app, host, port, sessionSecret) {
     }
   }));
 
-  app.get('/', stormpath.getUser, loadUserEvents, function(req, res) {
+  app.get('/', stormpath.getUser, loadAllEvents, function(req, res) {
     res.render('index');
   });
 
@@ -74,6 +74,39 @@ module.exports = function (app, host, port, sessionSecret) {
     		} else {
     			res.redirect('/');
     		}
+      }
+    });
+
+  });
+
+  // Delete an event
+  app.post('/event/delete/:id', function(req, res) {
+
+    Event.findById(req.params.id, function(err, eventToRemove) {
+  		if(err || !eventToRemove) {
+  			console.log('Error finding task on database.');
+  			res.redirect('/');
+  		}
+  		else {
+  			eventToRemove.remove();
+  			res.redirect('/');
+  		}
+  	});
+
+  });
+
+  // Join an event
+  app.post('/event/join/:id', stormpath.getUser, function(req, res) {
+
+    Event.findById(req.params.id, function(err, eventToJoin) {
+      if(err || !eventToJoin) {
+        console.log('Error finding task on database.');
+        res.redirect('/');
+      }
+      else {
+        eventToJoin.member.push(res.locals.user.href);
+        eventToJoin.save();
+        res.redirect('/');
       }
     });
 

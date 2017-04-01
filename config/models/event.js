@@ -15,7 +15,8 @@ const EventSchema = new Schema({
   name: stringField,
   type: stringField,
   place: stringField,
-  date: stringField
+  date: stringField,
+  member: [String]
 });
 
 module.exports = mongoose.model('Events', EventSchema);

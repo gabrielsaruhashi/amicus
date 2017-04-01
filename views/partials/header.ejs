@@ -35,8 +35,16 @@
 					<ul>
 						<li><a href="/">Home</a></li>
 						<li><a href="http://ab-blog.herokuapp.com/">Blog</a></li>
-						<li><a href="/login" class="button">Login</a></li>
-						<li><a href="/register" class="button">Sign Up</a></li>
+						<% if (!locals.user) { %>
+							<li><a href="/login" class="button">Login</a></li>
+							<li><a href="/register" class="button">Sign Up</a></li>
+						<% } else { %>
+							<li>
+								<form action="/logout" method="post">
+									<button class="button" type="submit" value="Logout"/>Logout</button>
+					      </form>
+							</li>
+						<% } %>
 					</ul>
 				</nav>
 			</header>

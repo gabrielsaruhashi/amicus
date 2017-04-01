@@ -2599,6 +2599,11 @@
 
 /* Button */
 
+	.btn-link {
+	  height: 40px;
+	  line-height:40px; /* here it is! */
+	}
+
 	input[type="submit"],
 	input[type="reset"],
 	input[type="button"],
