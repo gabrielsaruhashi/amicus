@@ -1,22 +1,21 @@
 // const UserSchema = require('./user.js');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
 
 const stringField = {
   type: String,
   minlength: 1,
-  maxlength: 50
+  maxlength: 500
 };
 
 const EventSchema = new Schema({
-  // owner_event : [UserSchema],
-  event_name: stringField,
-  event_type: stringField,
+  owner_id: stringField,
+  owner: stringField,
+  name: stringField,
+  type: stringField,
   place: stringField,
   date: stringField
 });
-
 
 module.exports = mongoose.model('Events', EventSchema);

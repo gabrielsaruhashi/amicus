@@ -1,6 +1,6 @@
 <% include ./partials/header.ejs %>
 
-	<% if (!locals.currentUser) { %>
+	<% if (!locals.user) { %>
 
 		<!-- Title Banner -->
 		<section id="banner">
@@ -60,36 +60,85 @@
 		<section class="container">
 			<section id="welcome" class="box special">
 				<header class="major">
-					<h2> Welcome, <%=currentUser.name%></h2>
-					<a href="/logout"> Logout </a>
+					<form id="logoutForm" class="form-inline" action="/logout" method="post">
+		        Welcome, <%=user.fullName%>.
+						<button class="btn btn-link" data-toggle="collapse" href="#createEventForm" aria-expanded="false" aria-controls="createEventForm">Create an Event</button>
+						<button class="btn btn-link" type="submit" value="Logout"/>Logout <i class="fa fa-sign-out" aria-hidden="true"></i></button>
+		      </form>
+					<!-- Create an Event -->
+					<div class="collapse" id="createEventForm">
+						<div class="card card-block">
+
+							<form class="createevent" action="/event/create" method="POST">
+								<div class="input-group mb-2 mr-sm-2 mb-sm-2">
+									<div class="input-group-addon"><i class="fa fa-bell" aria-hidden="true"></i></div>
+									<input class="form-control" name="name" type="text" placeholder="Event name">
+								</div>
+								<div class="input-group mb-2 mr-sm-2 mb-sm-2">
+									<div class="input-group-addon"><i class="fa fa-barcode" aria-hidden="true"></i></div>
+									<input class="form-control" name="type" type="text" placeholder="What kind of event is this?">
+								</div>
+								<div class="input-group mb-2 mr-sm-2 mb-sm-2">
+									<div class="input-group-addon"><i class="fa fa-building" aria-hidden="true"></i></div>
+									<input class="form-control" name="place" type="text" placeholder="Place">
+								</div>
+								<div class="input-group mb-2 mr-sm-2 mb-sm-2">
+									<div class="input-group-addon"><i class="fa fa-calendar-times-o" aria-hidden="true"></i></div>
+									<input class="form-control" name="day" type="text" placeholder="Day of the Week">
+								</div>
+								<div class="input-group mb-2 mr-sm-2 mb-sm-2">
+									<div class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+									<input class="form-control" name="time" type="text" placeholder="Time">
+								</div>
+								<input type="submit" class="log-in-submit btn btn-primary">
+							</form>
+
+						</div>
+					</div>
+					<!-- End of Create an Event -->
 				</header>
-				<p>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-				</p>
-				<p>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-				</p>
+
+				<!-- Error message -->
+				<% if (locals.errors) { %>
+					<p class="errors alert alert-warning"><%= errors %></p>
+				<% } %>
+				<!-- End of Error message -->
+
+				<div>
+					<!-- List of Events -->
+					<% if (locals.event) { %>
+					<h1>Events Near You</h1>
+					<ul class="tasks list-group">
+						<% event.forEach(function(event) { %>
+							<li class="list-group-item">
+								<%=event.type%>: <%=event.name%>, <%=event.place%>. By <%=event.owner%>
+							</li>
+						<% }); %>
+					<% } %>
+					</ul>
+				</div>
+
 			</section>
 		</section>
 	<% } %>
 
-		<!-- CTA -->
-		<section id="cta">
+	<!-- CTA -->
+	<section id="cta">
 
-			<h2>Sign up for our newsletter</h2>
-			<p>Be the first to know about updates, new functionalities and what our dev team is working on.</p>
+		<h2>Sign up for our newsletter</h2>
+		<p>Be the first to know about updates, new functionalities and what our dev team is working on.</p>
 
-			<form>
-				<div class="row uniform 50%">
-					<div class="8u 12u(mobilep)">
-						<input type="email" name="email" id="email" placeholder="Email Address" />
-					</div>
-					<div class="4u 12u(mobilep)">
-						<input type="submit" value="Sign Up" class="fit" />
-					</div>
+		<form>
+			<div class="row uniform 50%">
+				<div class="8u 12u(mobilep)">
+					<input type="email" name="email" id="email" placeholder="Email Address" />
 				</div>
-			</form>
+				<div class="4u 12u(mobilep)">
+					<input type="submit" value="Sign Up" class="fit" />
+				</div>
+			</div>
+		</form>
 
-		</section>
+	</section>
 
 <% include ./partials/footer.ejs %>
