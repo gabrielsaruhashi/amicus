@@ -9,7 +9,6 @@
 			<ul class="actions">
 				<li><a href="/login" class="button"><i class="fa fa-sign-in" aria-hidden="true"></i> Log In</a></li>
 				<li><a href="/signup" class="button"><i class="fa fa-user" aria-hidden="true"></i> Sign Up</a></li>
-				<li><a href="#introduction" class="button"><i class="fa fa-sticky-note" aria-hidden="true"></i> Learn More</a></li>
 			</ul>
 		</section>
 
@@ -58,7 +57,7 @@
 
 		<!-- Welcome -->
 		<section class="container">
-			<section id="welcome" class="box special">
+			<section id="welcome" class="box">
 				<header class="major">
 					<form id="logoutForm" class="form-inline" action="/logout" method="post">
 		        Welcome, <%=user.fullName%>.
@@ -104,18 +103,21 @@
 				<% } %>
 				<!-- End of Error message -->
 
-				<div>
-					<!-- List of Events -->
+				<!-- List of Events -->
+				<div class="col-sm-12">
 					<% if (locals.event) { %>
 					<h1>Events Near You</h1>
-					<ul class="tasks list-group">
-						<% event.forEach(function(event) { %>
-							<li class="list-group-item">
-								<%=event.type%>: <%=event.name%>, <%=event.place%>. By <%=event.owner%>
-							</li>
-						<% }); %>
+						<ul class="list-group">
+							<% event.forEach(function(event) { %>
+								<li class="list-group-item">
+									<span class="col-sm-10"><%=event.type%>: <%=event.name%>, <%=event.place%>. By <%=event.owner%></span>
+									<% if (event.owner_id == user.href) { %>
+											<a href=""><small>Delete</small></a>
+									<% } %>
+								</li>
+							<% }); %>
+						</ul>
 					<% } %>
-					</ul>
 				</div>
 
 			</section>
