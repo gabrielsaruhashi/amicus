@@ -2,7 +2,6 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
 
 const stringField = {
   type: String,
@@ -11,9 +10,10 @@ const stringField = {
 };
 
 const EventSchema = new Schema({
-  owner: ObjectId,
-  event_name: stringField,
-  event_type: stringField,
+  owner_id: stringField,
+  owner: stringField,
+  name: stringField,
+  type: stringField,
   place: stringField,
   date: stringField
 });
