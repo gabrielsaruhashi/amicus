@@ -1,0 +1,40 @@
+<% include ./partials/header.ejs %>
+  <section id="createEvent" class="box special">
+    <header class="major">
+      <h2>Create Event</h2>
+    </header>
+
+    <div class="col-sm-6 offset-sm-3">
+      <% if (locals.errors) { %>
+        <div class="alert alert-danger" role="alert">
+          <%=locals.errors%>
+        </div>
+      <% } %>
+
+      <form class="createevent" action="/newevent" method="POST">
+        <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+          <div class="input-group-addon"><i class="fa fa-user-address-card-o" aria-hidden="true"></i></div>
+          <input class="form-control" name="event_name" type="text" placeholder="Event Name!">
+        </div>
+        <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+          <div class="input-group-addon"><i class="fa fa-barcode" aria-hidden="true"></i></div>
+          <input class="form-control" name="event_type" type="text" placeholder="What kind of event is this?">
+        </div>
+        <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+          <div class="input-group-addon"><i class="fa fa-building" aria-hidden="true"></i></div>
+          <input class="form-control" name="place" type="text" placeholder="Place">
+        </div>
+        <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+          <div class="input-group-addon"><i class="fa fa-calendar-times-o" aria-hidden="true"></i></div>
+          <input class="form-control" name="day" type="text" placeholder="Day of the Week">
+        </div>
+        <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+          <div class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+          <input class="form-control" name="time" type="text" placeholder="Time">
+        </div>
+        <input type="submit" class="log-in-submit btn btn-primary">
+      </form>
+    </div>
+  </section>
+
+<% include ./partials/footer.ejs %>
