@@ -64,11 +64,40 @@
 					<a href="/logout"> Logout </a>
 				</header>
 				<p>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+				  <a class="btn btn-primary" data-toggle="collapse" href="#createEventForm" aria-expanded="false" aria-controls="createEventForm">
+				    Create an Event
+				  </a>
 				</p>
-				<p>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-				</p>
+				<div class="collapse" id="createEventForm">
+				  <div class="card card-block">
+						<!-- Create an Event -->
+						<form class="createevent" action="/event/create" method="POST">
+							<div class="input-group mb-2 mr-sm-2 mb-sm-2">
+								<div class="input-group-addon"><i class="fa fa-bell" aria-hidden="true"></i></div>
+								<input class="form-control" name="event_name" type="text" placeholder="Event name">
+							</div>
+							<div class="input-group mb-2 mr-sm-2 mb-sm-2">
+								<div class="input-group-addon"><i class="fa fa-barcode" aria-hidden="true"></i></div>
+								<input class="form-control" name="event_type" type="text" placeholder="What kind of event is this?">
+							</div>
+							<div class="input-group mb-2 mr-sm-2 mb-sm-2">
+								<div class="input-group-addon"><i class="fa fa-building" aria-hidden="true"></i></div>
+								<input class="form-control" name="place" type="text" placeholder="Place">
+							</div>
+							<div class="input-group mb-2 mr-sm-2 mb-sm-2">
+								<div class="input-group-addon"><i class="fa fa-calendar-times-o" aria-hidden="true"></i></div>
+								<input class="form-control" name="day" type="text" placeholder="Day of the Week">
+							</div>
+							<div class="input-group mb-2 mr-sm-2 mb-sm-2">
+								<div class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+								<input class="form-control" name="time" type="text" placeholder="Time">
+							</div>
+							<input type="submit" class="log-in-submit btn btn-primary">
+						</form>
+						<!-- End of Create an Event -->
+				  </div>
+				</div>
+
 			</section>
 		</section>
 	<% } %>

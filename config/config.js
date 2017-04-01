@@ -11,6 +11,7 @@ const validator = require('validator');
 const configDB = require('./database.js');
 mongoose.connect(configDB.url); // connect to our database
 const Users = require('./models/user.js');
+const Event = require('./models/event.js');
 
 const store = new MongoDBStore({
   uri: configDB.url,
@@ -132,4 +133,29 @@ module.exports = function (app, host, port, sessionSecret) {
       res.redirect('/');
     });
   });
+
+  // Event
+
+  app.post('/event/create', function (req, res) {
+
+  	var newEvent = new Event();
+    console.log('Hello');
+  	newEvent.owner = res.locals.currentUser;
+    newEvent.event_name = req.body.event_name;
+    newEvent.event_type = req.body.event_type;
+    newEvent.day = req.body.day;
+    newEvent.place = req.body.place;
+    newEvent.place = req.body.time;
+
+    newEvent.save(function(err, user){
+
+      if(user && !err){
+        req.session.userId = user._id;
+        res.redirect('/');
+        return;
+      }
+    })
+
+  });
+
 }
