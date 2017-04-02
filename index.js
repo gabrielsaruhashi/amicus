@@ -7,7 +7,7 @@ const config = require('./config/config.js');
 // setup app
 const app = express();
 const host = process.env.IP || '0.0.0.0';
-const port = process.env.PORT || 8800;
+const port = process.env.PORT || 8000;
 const sessionSecret = process.env.SESSION_SECRET || 'e70a1e1ee4b8f662f78';
 
 config(app, host, port, sessionSecret);

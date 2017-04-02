@@ -11,11 +11,13 @@ const stringField = {
 
 const EventSchema = new Schema({
   owner_id: stringField,
+  owner_username: stringField,
   owner: stringField,
   name: stringField,
   type: stringField,
   place: stringField,
-  date: stringField,
+  day: stringField,
+  time: stringField,
   member_id: [String],
   member_name: [String]
 });
