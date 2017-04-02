@@ -107,7 +107,8 @@
 									<!-- Event information -->
 									<div class="col-sm-10">
 										<%=event.type%>: <%=event.name%>, <%=event.place%>.<br/>
-										By: <% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %>
+										Organized: <% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %><br/>
+										<%=event.member.length%> joined.
 									</div>
 
 									<!-- Event function -->
