@@ -8,7 +8,7 @@
 			<p>A matchmaking app for social activities</p>
 			<ul class="actions">
 				<li><a href="/login" class="button"><i class="fa fa-sign-in" aria-hidden="true"></i> Log In</a></li>
-				<li><a href="/signup" class="button"><i class="fa fa-user" aria-hidden="true"></i> Sign Up</a></li>
+				<li><a href="/register" class="button"><i class="fa fa-user" aria-hidden="true"></i> Sign Up</a></li>
 			</ul>
 		</section>
 
@@ -108,7 +108,7 @@
 									<div class="col-sm-10">
 										<%=event.type%>: <%=event.name%>, <%=event.place%>.<br/>
 										Organized: <% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %><br/>
-										<%=event.member.length%> joined.
+										<%=event.member_name.length%> joined: <%=event.member_name.join(', ')%>
 									</div>
 
 									<!-- Event function -->
@@ -117,7 +117,7 @@
 											<form method="post" action="/event/delete/<%=event.id%>">
 	                      <button type="submit" name="delete" class="btn btn-link">Delete</button>
 	                    </form>
-										<% } else if (event.member.indexOf(user.href) > -1 ) { %>
+										<% } else if (event.member_id.indexOf(user.href) > -1 ) { %>
 											<form method="post" action="/event/withdraw/<%=event.id%>">
 												<button type="submit" name="withdraw" class="btn btn-link">Withdraw</button>
 											</form>
