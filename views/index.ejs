@@ -59,18 +59,16 @@
 		<section class="container">
 			<section id="welcome" class="box">
 				<div class="col-sm-12">
+					<!-- Create Event toogle -->
 					<a data-toggle="collapse" href="#createEventForm" aria-expanded="false" aria-controls="createEventForm">
 						Create an Event
 					</a>
-
 					<!-- Error message -->
 					<% if (locals.errors) { %>
 						<p class="errors alert alert-warning"><%= errors %></p>
 					<% } %>
-					<!-- End of Error message -->
 
 					<!-- Create an Event -->
-
 					<div class="collapse" id="createEventForm">
 						<div class="card card-block">
 							<form class="createevent" action="/event/create" method="POST">
@@ -98,7 +96,6 @@
 							</form>
 						</div>
 					</div>
-					<!-- End of Create an Event -->
 
 					<!-- List of Events -->
 					<% if (locals.event) { %>
@@ -106,9 +103,14 @@
 						<ul class="list-group">
 							<% event.forEach(function(event) { %>
 								<li class="list-group-item">
+
+									<!-- Event information -->
 									<div class="col-sm-10">
-										<%=event.type%>: <%=event.name%>, <%=event.place%>.<br/>By: <%=event.owner%>
+										<%=event.type%>: <%=event.name%>, <%=event.place%>.<br/>
+										By: <% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %>
 									</div>
+
+									<!-- Event function -->
 									<div class="col-sm-2">
 										<% if (event.owner_id == user.href) { %>
 											<form method="post" action="/event/delete/<%=event.id%>">
@@ -124,6 +126,7 @@
 											</form>
 										<% } %>
 									</div>
+
 								</li>
 							<% }); %>
 						</ul>
