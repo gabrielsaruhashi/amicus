@@ -6,10 +6,14 @@ const stormpath = require('express-stormpath');
 
 // connect to database
 const configDB = require('./database.js');
+
+mongoose.Promise = global.Promise;
 mongoose.connect(configDB.url); // connect to our database
 
 // require models
 const Event = require('./models/event.js');
+
+const Users = require('./models/userdata.js');
 
 function loadAllEvents(req, res, next) {
   if(!res.locals.user) {
@@ -28,6 +32,29 @@ function loadAllEvents(req, res, next) {
   );
 }
 
+function addNewUser(account, req, res, next){
+  
+      var newUser = new Users();
+      newUser.username = account.username;
+      newUser.firstname = account.givenName;
+      newUser.lastname = account.surname;
+      newUser.email = account.email;
+      newUser.college = "";
+      newUser.classyear = "";
+      newUser.phone = "";
+      newUser.interests = "";
+  
+      newUser.save(function(err, userdata){
+  
+          if(err || !userdata) {
+            console.log('Error saving task to the database.');
+      		} else {
+      		  console.log('New User: '+userdata.username);
+      		}
+      });
+      next();
+}
+
 module.exports = function (app, host, port, sessionSecret) {
 
   // Configure our app
@@ -39,18 +66,77 @@ module.exports = function (app, host, port, sessionSecret) {
   // init stormpath
   const stormpathInfo = require('./stormpath.js');
   app.use(stormpath.init(app, {
+    web: {
+      register: {
+        form: {
+          fields: {
+            username: {
+              enabled: true
+            }
+          }
+        }
+      }
+    },
     apiKey: {
       id: stormpathInfo.id,
       secret: stormpathInfo.secret
     },
     application: {
       href: stormpathInfo.href
-    }
+    },
+    postRegistrationHandler: addNewUser
   }));
 
   app.get('/', stormpath.getUser, loadAllEvents, function(req, res) {
     res.render('index');
   });
+  
+  
+  app.get('/profile/:username', stormpath.getUser, function (req, res) {
+    if(!res.locals.user){ 
+      res.redirect('/');}
+    else {
+      Users.findOne({username:req.params.username}, function (err, userdata) {
+        if (err) {        
+          res.redirect('/');// handle error
+        }
+        if(userdata != null)
+        {
+          res.locals.userdata = userdata;
+          res.render('profile', {'userid':req.user.username});
+        }
+        else
+        {
+          res.redirect('/');// handle error
+        }
+      });
+    } 
+  });
+
+  app.post('/profile/edit', stormpath.getUser, function (req, res) {
+
+    Users.findOne({username:req.body.username}, function (err, userdata) {
+        if (err) {        
+          console.log('error');
+        }
+        if(userdata != null)
+        {
+          userdata.classyear = req.body.classyear;
+          userdata.college = req.body.college;
+          userdata.phone = req.body.phone;
+          userdata.interests = req.body.interests;
+          userdata.save();
+          res.locals.userdata = userdata;
+          res.render('profile', {'userid':req.body.username});
+        }
+        else
+        {
+          console.log('error');
+          res.redirect('/');
+        }
+      });
+  });
+
 
   // Event
 
@@ -76,7 +162,6 @@ module.exports = function (app, host, port, sessionSecret) {
     		}
       }
     });
-
   });
 
   // Delete an event
@@ -92,7 +177,6 @@ module.exports = function (app, host, port, sessionSecret) {
   			res.redirect('/');
   		}
   	});
-
   });
 
   // Join an event
