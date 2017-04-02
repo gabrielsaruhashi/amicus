@@ -33,7 +33,7 @@ function loadAllEvents(req, res, next) {
 }
 
 function addNewUser(account, req, res, next){
-  
+
       var newUser = new Users();
       newUser.username = account.username;
       newUser.firstname = account.givenName;
@@ -43,9 +43,9 @@ function addNewUser(account, req, res, next){
       newUser.classyear = "";
       newUser.phone = "";
       newUser.interests = "";
-  
+
       newUser.save(function(err, userdata){
-  
+
           if(err || !userdata) {
             console.log('Error saving task to the database.');
       		} else {
@@ -90,14 +90,14 @@ module.exports = function (app, host, port, sessionSecret) {
   app.get('/', stormpath.getUser, loadAllEvents, function(req, res) {
     res.render('index');
   });
-  
-  
+
+
   app.get('/profile/:username', stormpath.getUser, function (req, res) {
-    if(!res.locals.user){ 
+    if(!res.locals.user){
       res.redirect('/');}
     else {
       Users.findOne({username:req.params.username}, function (err, userdata) {
-        if (err) {        
+        if (err) {
           res.redirect('/');// handle error
         }
         if(userdata != null)
@@ -110,13 +110,13 @@ module.exports = function (app, host, port, sessionSecret) {
           res.redirect('/');// handle error
         }
       });
-    } 
+    }
   });
 
   app.post('/profile/edit', stormpath.getUser, function (req, res) {
 
     Users.findOne({username:req.body.username}, function (err, userdata) {
-        if (err) {        
+        if (err) {
           console.log('error');
         }
         if(userdata != null)
@@ -145,6 +145,7 @@ module.exports = function (app, host, port, sessionSecret) {
 
   	var newEvent = new Event();
     newEvent.owner_id = res.locals.user.href;
+    newEvent.owner_username = res.locals.user.username;
     newEvent.owner = res.locals.user.fullName;
     newEvent.name = req.body.name;
     newEvent.type = req.body.type;
