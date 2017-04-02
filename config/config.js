@@ -112,4 +112,21 @@ module.exports = function (app, host, port, sessionSecret) {
 
   });
 
+  // Withdraw from an event
+  app.post('/event/withdraw/:id', stormpath.getUser, function(req, res) {
+
+    Event.findById(req.params.id, function(err, eventToJoin) {
+      if(err || !eventToJoin) {
+        console.log('Error finding task on database.');
+        res.redirect('/');
+      }
+      else {
+        eventToJoin.member.pull(res.locals.user.href);
+        eventToJoin.save();
+        res.redirect('/');
+      }
+    });
+
+  });
+
 }
