@@ -17,7 +17,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="/assets/css/main.css" type="text/css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 
     <!-- Font Awesome Icon Pack -->
@@ -39,6 +39,7 @@
 							<li><a href="/login" class="button">Login</a></li>
 							<li><a href="/register" class="button">Sign Up</a></li>
 						<% } else { %>
+							<li><a href="/profile/<%=locals.user.username%>">Profile</a></li>
 							<li>
 								<form action="/logout" method="post">
 									<button class="button" type="submit" value="Logout"/>Logout</button>
