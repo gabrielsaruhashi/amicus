@@ -91,11 +91,18 @@ module.exports = function (app, host, port, sessionSecret) {
     res.render('index');
   });
 
+  app.get('/event/create', stormpath.getUser, loadAllEvents, function(req, res) {
+    if(!res.locals.user){
+      res.redirect('/');
+    } else {
+      res.render('create_event');
+    }
+  });
 
   app.get('/profile/:username', stormpath.getUser, function (req, res) {
     if(!res.locals.user){
-      res.redirect('/');}
-    else {
+      res.redirect('/');
+    } else {
       Users.findOne({username:req.params.username}, function (err, userdata) {
         if (err) {
           res.redirect('/');// handle error

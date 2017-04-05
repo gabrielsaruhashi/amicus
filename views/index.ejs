@@ -5,45 +5,6 @@
 		<!-- Welcome -->
 		<section class="container">
 			<section id="welcome" class="box">
-				<div class="col-sm-12">
-					<!-- Create Event toogle -->
-					<a class="btn btn-primary" data-toggle="collapse" href="#createEventForm" aria-expanded="false" aria-controls="createEventForm">
-						Create an Event
-					</a>
-					<!-- Error message -->
-					<% if (locals.errors) { %>
-						<p class="errors alert alert-warning"><%= errors %></p>
-					<% } %>
-
-					<!-- Create an Event -->
-					<div class="collapse" id="createEventForm">
-						<div class="card card-block">
-							<form class="createevent" action="/event/create" method="POST">
-								<div class="input-group mb-2 mr-sm-2 mb-sm-2">
-									<div class="input-group-addon"><i class="fa fa-bell" aria-hidden="true"></i></div>
-									<input class="form-control" name="name" type="text" placeholder="Event name">
-								</div>
-								<div class="input-group mb-2 mr-sm-2 mb-sm-2">
-									<div class="input-group-addon"><i class="fa fa-barcode" aria-hidden="true"></i></div>
-									<input class="form-control" name="type" type="text" placeholder="What kind of event is this?">
-								</div>
-								<div class="input-group mb-2 mr-sm-2 mb-sm-2">
-									<div class="input-group-addon"><i class="fa fa-building" aria-hidden="true"></i></div>
-									<input class="form-control" name="place" type="text" placeholder="Place">
-								</div>
-								<div class="input-group mb-2 mr-sm-2 mb-sm-2">
-									<div class="input-group-addon"><i class="fa fa-calendar-times-o" aria-hidden="true"></i></div>
-									<input class="form-control" name="day" type="text" placeholder="Day of the Week">
-								</div>
-								<div class="input-group mb-2 mr-sm-2 mb-sm-2">
-									<div class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
-									<input class="form-control" name="time" type="text" placeholder="Time">
-								</div>
-								<input type="submit" class="btn btn-primary">
-							</form>
-						</div>
-					</div>
-
 					<!-- List of Events -->
 					<% if (locals.event) { %>
 						<br> </br>
