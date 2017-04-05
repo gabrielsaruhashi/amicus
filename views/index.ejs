@@ -32,7 +32,8 @@
 									<%=event.type%>: <%=event.name%>, <%=event.place%>.<br/>
 									<b> On <%=event.day%> at <%=event.time%> </b><br/>
 									Organized: <a href="/profile/<%=event.owner_username%>"><% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %></a><br>
-									<%=event.member_name.length%> joined. <%=event.member_name.join(', ')%>
+									<%=event.member_name.length%> Joined. 
+									<%for (i = 0; i < event.member_name.length; i++){%><a href="/profile/<%=event.member_username[i]%>"><%=event.member_name[i]%></a><%if (i !=  event.member_name.length - 1) { %>, <% } } %>
 								</div>
 
 								<!-- Event function -->
@@ -41,7 +42,7 @@
 										<form method="post" action="/event/delete/<%=event.id%>">
                       <button type="submit" name="delete" class="btn btn-link">Delete</button>
                     </form>
-									<% } else if (event.member_id.indexOf(user.href) > -1 ) { %>
+									<% } else if (event.member_username.indexOf(user.username) > -1 ) { %>
 										<form method="post" action="/event/withdraw/<%=event.id%>">
 											<button type="submit" name="withdraw" class="btn btn-link">Withdraw</button>
 										</form>
