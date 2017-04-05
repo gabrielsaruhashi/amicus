@@ -1,61 +1,6 @@
 <% include ./partials/header.ejs %>
 
-	<% if (!locals.user) { %>
-
-		<!-- Title Banner -->
-		<section id="banner">
-			<h2>We•Chilling</h2>
-			<p>A matchmaking app for social activities</p>
-			<ul class="actions">
-				<li><a href="/login" class="button"><i class="fa fa-sign-in" aria-hidden="true"></i> Log In</a></li>
-				<li><a href="/register" class="button"><i class="fa fa-user" aria-hidden="true"></i> Sign Up</a></li>
-			</ul>
-		</section>
-
-		<!-- Introduction -->
-		<section id="main" class="container">
-			<section id="introduction" class="box special">
-				<header class="major">
-					<h2>Introducing the ultimate app
-					<br />
-					for getting the most out of your free time</h2>
-					<p>Know what your friends are doing. Post whatever you feel like doing<br />
-					and connect with people who are interested in doing the same.</p>
-				</header>
-				<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
-			</section>
-
-			<section class="box special features">
-				<div class="features-row">
-					<section>
-						<span class="icon major fa-futbol-o accent2"></span>
-						<h3>Sports</h3>
-						<p>Interested in playing sports with people who play just like you? Pick-up Basketball, Soccer, Pool and Chess matches divided by players' ability.</p>
-					</section>
-					<section>
-						<span class="icon major fa-book accent3"></span>
-						<h3>Study Groups</h3>
-						<p>Do you have a CS midterm coming up and are you looking for people to study together? Group studies divided by subjects and learning styles</p>
-					</section>
-				</div>
-				<div class="features-row">
-					<section>
-						<span class="icon major fa-film accent4"></span>
-						<h3>Cultural Events</h3>
-						<p>Staying on campus during a break and looking for people to watch a movie or go to the theater together? See who's up for a cultural event.</p>
-					</section>
-					<section>
-						<span class="icon major fa-code accent5"></span>
-						<h3>Project Groups</h3>
-						<p>Do you have a great idea for an app or are you looking for people to discuss a Business case? See who's also looking for help with projects</p>
-					</section>
-				</div>
-			</section>
-		</section>
-
-	<% } else { %>
-
-		<br>
+	<% if (locals.user) { %>
 
 		<!-- Welcome -->
 		<section class="container">
@@ -136,6 +81,59 @@
 							<% }); %>
 						</ul>
 					<% } %>
+				</div>
+			</section>
+		</section>
+
+	<% } else { %>
+
+		<!-- Title Banner -->
+		<section id="banner">
+			<h2>We•Chilling</h2>
+			<p>A matchmaking app for social activities</p>
+			<ul class="actions">
+				<li><a href="/login" class="button"><i class="fa fa-sign-in" aria-hidden="true"></i> Log In</a></li>
+				<li><a href="/register" class="button"><i class="fa fa-user" aria-hidden="true"></i> Sign Up</a></li>
+			</ul>
+		</section>
+
+		<!-- Introduction -->
+		<section id="main" class="container">
+			<section id="introduction" class="box special">
+				<header class="major">
+					<h2>Introducing the ultimate app
+					<br />
+					for getting the most out of your free time</h2>
+					<p>Know what your friends are doing. Post whatever you feel like doing<br />
+					and connect with people who are interested in doing the same.</p>
+				</header>
+				<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
+			</section>
+
+			<section class="box special features">
+				<div class="features-row">
+					<section>
+						<span class="icon major fa-futbol-o accent2"></span>
+						<h3>Sports</h3>
+						<p>Interested in playing sports with people who play just like you? Pick-up Basketball, Soccer, Pool and Chess matches divided by players' ability.</p>
+					</section>
+					<section>
+						<span class="icon major fa-book accent3"></span>
+						<h3>Study Groups</h3>
+						<p>Do you have a CS midterm coming up and are you looking for people to study together? Group studies divided by subjects and learning styles</p>
+					</section>
+				</div>
+				<div class="features-row">
+					<section>
+						<span class="icon major fa-film accent4"></span>
+						<h3>Cultural Events</h3>
+						<p>Staying on campus during a break and looking for people to watch a movie or go to the theater together? See who's up for a cultural event.</p>
+					</section>
+					<section>
+						<span class="icon major fa-code accent5"></span>
+						<h3>Project Groups</h3>
+						<p>Do you have a great idea for an app or are you looking for people to discuss a Business case? See who's also looking for help with projects</p>
+					</section>
 				</div>
 			</section>
 		</section>
