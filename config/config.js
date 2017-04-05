@@ -196,7 +196,7 @@ module.exports = function (app, host, port, sessionSecret) {
         res.redirect('/');
       }
       else {
-        eventToJoin.member_id.push(res.locals.user.href);
+        eventToJoin.member_username.push(res.locals.user.username);
         eventToJoin.member_name.push(res.locals.user.fullName);
         eventToJoin.save();
         res.redirect('/');
@@ -214,7 +214,7 @@ module.exports = function (app, host, port, sessionSecret) {
         res.redirect('/');
       }
       else {
-        eventToJoin.member_id .pull(res.locals.user.href);
+        eventToJoin.member_username.pull(res.locals.user.username);
         eventToJoin.member_name.pull(res.locals.user.fullName);
         eventToJoin.save();
         res.redirect('/');
