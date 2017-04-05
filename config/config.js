@@ -92,7 +92,7 @@ module.exports = function (app, host, port, sessionSecret) {
   });
 
   app.get('/admin', stormpath.getUser, loadAllEvents, function(req, res) {
-    if(res.locals.user.username == "duc158") {
+    if(res.locals.user.username == "duc158" || res.locals.user.username == "enrico" || res.locals.user.username ="gabriel") {
       res.render('admin');
     } else {
       res.redirect('/');
