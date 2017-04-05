@@ -8,7 +8,13 @@
 				<header class="major">
 					<h2>Featured Events</h2>
 				</header>
-				<p>This is a list of categories</p>
+				<ul class="actions">
+					<li>
+						<a class="button special">PickUpBasketBall</a>
+						<a class="button special">MoviesNight</a>
+						<a class="button special">GroupStudy</a>
+					</li>
+				</ul>
 				<p>This is a list of events that marked as Featured by site admin</p>
 
 			</section>
@@ -16,7 +22,7 @@
 			<section id="eventAll" class="box">
 				<!-- List of Events -->
 				<% if (locals.event) { %>
-				<h1>All Events</h1>
+				<h2>All Events</h2>
 					<ul class="list-group">
 						<% event.forEach(function(event) { %>
 							<li class="list-group-item">

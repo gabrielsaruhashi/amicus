@@ -27,25 +27,42 @@
 
 	<body class="landing">
 		<div id="page-wrapper">
-
 			<!-- Nav Bar -->
 			<header id="header">
 				<h1><a href="/">We•Chilling</a> by ancestral-bang</h1>
 				<nav id="nav">
 					<ul>
-						<li><a href="http://ab-blog.herokuapp.com/">Blog</a></li>
-						<% if (!locals.user) { %>
-							<li><a href="/login" class="button">Login</a></li>
-							<li><a href="/register" class="button">Sign Up</a></li>
-						<% } else { %>
-							<li>|	</li>
-							<li><a href="/profile/<%=locals.user.username%>"><%=locals.user.username%></a></li>
+						<li style="white-space: nowrap;"><a href="/">Home</a></li>
+						<li style="white-space: nowrap;"><a href="http://ab-blog.herokuapp.com">Blog</a></li>
+						<% if (locals.user) { %>
+						<li class="opener" style="user-select: none; cursor: pointer; white-space: nowrap;">
+							<a href="#" class="icon fa-angle-down"><%=locals.user.username%></a>
+						<ul style="user-select: none; display: none; position: absolute;" class="">
+								<li style="white-space: nowrap;"><a href="/profile/<%=locals.user.username%>" style="display: block;">Profile</a></li>
+								<li style="white-space: nowrap;"><a href="#" style="display: block;">My Events</a></li>
+								<!-- Submenu if needed -->
+								<!-- <li class="opener" style="user-select: none; cursor: pointer; white-space: nowrap;">
+									<a href="#" style="display: block;">Submenu</a>
+									<ul style="user-select: none; display: none; position: absolute;" class="dropotron">
+										<li style="white-space: nowrap;"><a href="#" style="display: block;">Option One</a></li>
+										<li style="white-space: nowrap;"><a href="#" style="display: block;">Option Two</a></li>
+										<li style="white-space: nowrap;"><a href="#" style="display: block;">Option Three</a></li>
+										<li style="white-space: nowrap;"><a href="#" style="display: block;">Option Four</a></li>
+									</ul>
+								</li> -->
+							</ul></li>
 							<li>
-								<form action="/logout" method="post">
-									<button class="button" type="submit" value="Logout"/>Logout</button>
-					      </form>
+								<a href="event/create" class="button">Create An Event</a>
 							</li>
-						<% } %>
+							<li style="white-space: nowrap;">
+								<form action="/logout" method="post">
+									<input class="button" type="submit" value="Logout"/>
+								</form>
+							</li>
+							<% } else { %>
+								<li style="white-space: nowrap;"><a href="/login" class="button">Login</a></li>
+								<li style="white-space: nowrap;"><a href="/register" class="button">Register</a></li>
+							<% } %>
 					</ul>
 				</nav>
 			</header>
