@@ -91,14 +91,17 @@ module.exports = function (app, host, port, sessionSecret) {
     res.render('index');
   });
 
-  app.get('/event/create', stormpath.getUser, loadAllEvents, function(req, res) {
-    if(!res.locals.user){
-      res.redirect('/');
+  app.get('/admin', stormpath.getUser, loadAllEvents, function(req, res) {
+    if(res.locals.user.username == "duc158" || res.locals.user.username == "enrico" || res.locals.user.username ="gabriel") {
+      res.render('admin');
     } else {
-      res.render('create_event');
+      res.redirect('/');
     }
   });
 
+  // User
+
+  // Show the profile page
   app.get('/profile/:username', stormpath.getUser, function (req, res) {
     if(!res.locals.user){
       res.redirect('/');
@@ -120,6 +123,7 @@ module.exports = function (app, host, port, sessionSecret) {
     }
   });
 
+  // Edit the profile page
   app.post('/profile/edit', stormpath.getUser, function (req, res) {
 
     Users.findOne({username:req.body.username}, function (err, userdata) {
@@ -148,6 +152,10 @@ module.exports = function (app, host, port, sessionSecret) {
   // Event
 
   // Create a new event
+  app.get('/event/create', stormpath.getUser, function(req, res) {
+    res.render('create_event');
+  });
+
   app.post('/event/create', stormpath.getUser, function (req, res) {
 
   	var newEvent = new Event();
@@ -159,6 +167,7 @@ module.exports = function (app, host, port, sessionSecret) {
     newEvent.day = req.body.day;
     newEvent.place = req.body.place;
     newEvent.time = req.body.time;
+    newEvent.feature = 0;
 
     newEvent.save(function(err, event){
 
@@ -185,6 +194,23 @@ module.exports = function (app, host, port, sessionSecret) {
   			res.redirect('/');
   		}
   	});
+  });
+
+  // Join an event
+  app.post('/event/feature/:id', stormpath.getUser, function(req, res) {
+
+    Event.findById(req.params.id, function(err, eventToFeature) {
+      if(err || !eventToFeature) {
+        console.log('Error finding task on database.');
+        res.redirect('/admin');
+      }
+      else {
+        eventToFeature.feature = 1 - eventToFeature.feature;
+        eventToFeature.save();
+        res.redirect('/admin');
+      }
+    });
+
   });
 
   // Join an event
