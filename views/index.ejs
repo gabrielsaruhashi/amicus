@@ -46,10 +46,8 @@
 				<% } %>
 				<br/>
 				<ul class="actions">
-					<li>
-						<a class="button special">PickUpBasketBall</a>
-						<a class="button special">MoviesNight</a>
-						<a class="button special">GroupStudy</a>
+					<li> 
+						<%for (i = 0; i < locals.types.length; i++){%><a class="button special"><%=locals.types[i]%></a> <% } %>
 					</li>
 				</ul>
 			</section>

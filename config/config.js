@@ -56,6 +56,8 @@ function addNewUser(account, req, res, next){
 }
 
 module.exports = function (app, host, port, sessionSecret) {
+  
+  var EventTypes = require('./eventtype.js');
 
   // Configure our app
   app.use(cookieParser()); // read cookies (needed for auth)
@@ -88,6 +90,7 @@ module.exports = function (app, host, port, sessionSecret) {
   }));
 
   app.get('/', stormpath.getUser, loadAllEvents, function(req, res) {
+    res.locals.types = EventTypes;
     res.render('index');
   });
 
@@ -152,8 +155,13 @@ module.exports = function (app, host, port, sessionSecret) {
   // Event
 
   // Create a new event
-  app.get('/event/create', stormpath.getUser, function(req, res) {
-    res.render('create_event');
+  app.get('/event/create', stormpath.getUser, loadAllEvents, function(req, res) {
+    res.locals.types = EventTypes;
+    if(!res.locals.user){
+      res.redirect('/');
+    } else {
+      res.render('create_event');
+    }
   });
 
   app.post('/event/create', stormpath.getUser, function (req, res) {
