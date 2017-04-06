@@ -9,10 +9,8 @@
 					<h2>Featured Events</h2>
 				</header>
 				<ul class="actions">
-					<li>
-						<a class="button special">PickUpBasketBall</a>
-						<a class="button special">MoviesNight</a>
-						<a class="button special">GroupStudy</a>
+					<li> 
+						<%for (i = 0; i < locals.types.length; i++){%><a class="button special"><%=locals.types[i]%></a> <% } %>
 					</li>
 				</ul>
 				<p>This is a list of events that marked as Featured by site admin</p>
