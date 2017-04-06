@@ -20,6 +20,7 @@ const EventSchema = new Schema({
   time: stringField,
   member_username: [String],
   member_name: [String],
+  feature: Boolean,
 });
 
 module.exports = mongoose.model('Events', EventSchema);
