@@ -7,6 +7,21 @@
 			<section id="eventFeature" class="box">
 				<header class="major">
 					<h2>Featured Events</h2>
+					
+					<ul>
+
+						<div class="col-sm-4" align="right" style="float:right" >
+							<span class="image featured"> <img src="images/Basketball.png" alt=""  /> </span>
+						</div>
+						<div class="col-sm-4" align="left" style="float:left">
+							<span class="image featured"> <img src="images/today.png" alt="" /> </span>
+						</div>
+						<div class="col-sm-4" align="center" style="float:right">
+							<span class="image featured"> <img src="images/Movie.png" alt=""/> </span>
+						</div>
+
+					</ul>
+
 				</header>
 				<!-- List of Feature Events -->
 				<% if (locals.event) { %>
@@ -44,12 +59,8 @@
 						<% }); %>
 					</ul>
 				<% } %>
-				<br/>
-				<ul class="actions">
-					<li> 
-						<%for (i = 0; i < locals.types.length; i++){%><a class="button special"><%=locals.types[i]%></a> <% } %>
-					</li>
-				</ul>
+
+
 			</section>
 			<section id="eventAll" class="box">
 				<!-- List of Events -->
@@ -114,7 +125,7 @@
 					<p>Know what your friends are doing. Post whatever you feel like doing<br />
 					and connect with people who are interested in doing the same.</p>
 				</header>
-				<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
+				<span class="image featured"></span>
 			</section>
 
 			<section class="box special features">
