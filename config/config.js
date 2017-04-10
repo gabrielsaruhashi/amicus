@@ -148,7 +148,7 @@ module.exports = function (app, host, port, sessionSecret) {
   // User
 
   // Show the profile page
-  app.get('/:username/profile/', stormpath.getUser, function (req, res) {
+  app.get('/profile/:username', stormpath.getUser, function (req, res) {
     if(!res.locals.user){
       res.redirect('/');
     } else {
@@ -195,7 +195,7 @@ module.exports = function (app, host, port, sessionSecret) {
   });
 
   // Show the user event
-  app.get('/:username/event', stormpath.getUser, loadUserEvents, function (req, res) {
+  app.get('/event/:username', stormpath.getUser, loadUserEvents, function (req, res) {
     if(!res.locals.user){
       res.redirect('/');
     } else {
