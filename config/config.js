@@ -147,61 +147,61 @@ module.exports = function (app, host, port, sessionSecret) {
 
   // User
 
-  // Show the profile page
-  app.get('/profile/:username', stormpath.getUser, function (req, res) {
-    if(!res.locals.user){
-      res.redirect('/');
-    } else {
-      Users.findOne({username:req.params.username}, function (err, userdata) {
-        if (err) {
-          res.redirect('/');// handle error
-        }
-        if(userdata != null)
-        {
-          res.locals.userdata = userdata;
-          res.render('profile', {'userid':req.user.username});
-        }
-        else
-        {
-          res.redirect('/');// handle error
-        }
-      });
-    }
-  });
+    // Show the profile page
+    app.get('/:username/profile', stormpath.getUser, function (req, res) {
+      if(!res.locals.user){
+        res.redirect('/');
+      } else {
+        Users.findOne({username:req.params.username}, function (err, userdata) {
+          if (err) {
+            res.redirect('/');// handle error
+          }
+          if(userdata != null)
+          {
+            res.locals.userdata = userdata;
+            res.render('profile', {'userid':req.user.username});
+          }
+          else
+          {
+            res.redirect('/');// handle error
+          }
+        });
+      }
+    });
 
-  // Edit the profile page
-  app.post('/profile/edit', stormpath.getUser, function (req, res) {
+    // Edit the profile page
+    app.post('/:username/profile/edit', stormpath.getUser, function (req, res) {
 
-    Users.findOne({username:req.body.username}, function (err, userdata) {
-        if (err) {
-          console.log('error');
-        }
-        if(userdata != null)
-        {
-          userdata.classyear = req.body.classyear;
-          userdata.college = req.body.college;
-          userdata.phone = req.body.phone;
-          userdata.interests = req.body.interests;
-          userdata.save();
-          res.locals.userdata = userdata;
-          res.render('profile', {'userid':req.body.username});
-        }
-        else
-        {
-          console.log('error');
-          res.redirect('/');
-        }
-      });
-  });
+      Users.findOne({username:req.body.username}, function (err, userdata) {
+          if (err) {
+            console.log('error');
+          }
+          if(userdata != null)
+          {
+            userdata.classyear = req.body.classyear;
+            userdata.college = req.body.college;
+            userdata.phone = req.body.phone;
+            userdata.interests = req.body.interests;
+            userdata.save();
+            res.locals.userdata = userdata;
+            res.render('profile', {'userid':req.body.username});
+          }
+          else
+          {
+            console.log('error');
+            res.redirect('/');
+          }
+        });
+    });
 
-  // Show the user event
-  app.get('/event/:username', stormpath.getUser, loadUserEvents, function (req, res) {
-    if(!res.locals.user){
-      res.redirect('/');
-    } else {
-      res.render('event');
-    }
-  });
+    // Show the user event
+    app.get('/:username/event', stormpath.getUser, loadUserEvents, function (req, res) {
+      if(!res.locals.user){
+        res.redirect('/');
+      } else {
+        res.render('event');
+      }
+    });
 
   // Event
 
