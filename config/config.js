@@ -43,9 +43,7 @@ const Users = require('./models/userdata.js');
 			{member_username: { "$in" : [res.locals.user.username] } }
 		]}, function(err, userevent) {
         if(!err) {
-          console.log(res.locals.user.username);
-          console.log(userevent);
-          res.locals.event = userevent;
+          res.locals.userevent = userevent;
         }
         else {
           res.redirect('/');

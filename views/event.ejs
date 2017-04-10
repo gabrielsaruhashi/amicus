@@ -1,10 +1,44 @@
 <% include ./partials/header.ejs %>
 
-  <section class="container">
-    <section id="welcome" class="box">
-      <% if (locals.userevent) { %> <%=locals.userevent%> <% } %>
-        This will show all events that the user created and joined.
-      </section>
-    </section>
+<section class="container">
+  <section id="welcome" class="box">
+    <!-- List of Events -->
+    <% if (locals.userevent.length > 0) { %>
+      <ul class="list-group">
+        <% userevent.forEach(function(event) { %>
+          <li class="list-group-item">
+            <!-- Event information -->
+            <div class="col-sm-10">
+              <%=event.type%>: <%=event.name%>, <%=event.place%>.<br/>
+              <b> On <%=event.day%> at <%=event.time%> </b><br/>
+              Organized: <a href="/profile/<%=event.owner_username%>"><% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %></a><br>
+              <%=event.member_name.length%> Joined.
+              <%for (i = 0; i < event.member_name.length; i++){%><a href="/profile/<%=event.member_username[i]%>"><%=event.member_name[i]%></a><%if (i !=  event.member_name.length - 1) { %>, <% } } %>
+            </div>
+
+            <!-- Event function -->
+            <div class="col-sm-2">
+              <% if (event.owner_id == user.href) { %>
+                <form method="post" action="/event/delete/<%=event.id%>">
+                  <button type="submit" name="delete" class="btn btn-link">Delete</button>
+                </form>
+              <% } else if (event.member_username.indexOf(user.username) > -1 ) { %>
+                <form method="post" action="/event/withdraw/<%=event.id%>">
+                  <button type="submit" name="withdraw" class="btn btn-link">Withdraw</button>
+                </form>
+              <% } else { %>
+                <form method="post" action="/event/join/<%=event.id%>">
+                  <button type="submit" name="join" class="btn btn-link">Join</button>
+                </form>
+              <% } %>
+            </div>
+          </li>
+        <% }); %>
+      </ul>
+    <% } else { %>
+      You did not create or joined any event.
+    <% } %>
+  </section>
+</section>
 
 <% include ./partials/footer.ejs %>
