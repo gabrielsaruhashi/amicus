@@ -1,0 +1,10 @@
+<% include ./partials/header.ejs %>
+
+  <section class="container">
+    <section id="welcome" class="box">
+      <% if (locals.userevent) { %> <%=locals.userevent%> <% } %>
+        This will show all events that the user created and joined.
+      </section>
+    </section>
+
+<% include ./partials/footer.ejs %>

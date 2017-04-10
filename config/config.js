@@ -15,22 +15,45 @@ const Event = require('./models/event.js');
 
 const Users = require('./models/userdata.js');
 
-function loadAllEvents(req, res, next) {
-  if(!res.locals.user) {
-    return next();
+  // Load all events
+  function loadAllEvents(req, res, next) {
+    if(!res.locals.user) {
+      return next();
+    }
+
+    Event.find( function(err, event) {
+        if(!err) {
+          res.locals.event = event;
+        }
+        else {
+          res.redirect('/');
+        }
+        next();
+      }
+    );
   }
 
-  Event.find( function(err, event) {
-      if(!err) {
-        res.locals.event = event;
-      }
-      else {
-        res.render('index', { errors: 'Error loading task.'} );
-      }
-      next();
+  // Load all events that the user created
+  function loadUserEvents(req, res, next) {
+    if(!res.locals.user) {
+      return next();
     }
-  );
-}
+    Event.find({ $or:[
+			{owner_username: res.locals.user.username},
+			{member_username: { "$in" : [res.locals.user.username] } }
+		]}, function(err, userevent) {
+        if(!err) {
+          console.log(res.locals.user.username);
+          console.log(userevent);
+          res.locals.event = userevent;
+        }
+        else {
+          res.redirect('/');
+        }
+        next();
+      }
+    );
+  }
 
 function addNewUser(account, req, res, next){
 
@@ -63,7 +86,7 @@ function addNewUser(account, req, res, next){
 }
 
 module.exports = function (app, host, port, sessionSecret) {
-  
+
   var EventTypes = require('./eventtype.js');
 
   // Configure our app
@@ -127,7 +150,7 @@ module.exports = function (app, host, port, sessionSecret) {
   // User
 
   // Show the profile page
-  app.get('/profile/:username', stormpath.getUser, function (req, res) {
+  app.get('/:username/profile/', stormpath.getUser, function (req, res) {
     if(!res.locals.user){
       res.redirect('/');
     } else {
@@ -173,6 +196,14 @@ module.exports = function (app, host, port, sessionSecret) {
       });
   });
 
+  // Show the user event
+  app.get('/:username/event', stormpath.getUser, loadUserEvents, function (req, res) {
+    if(!res.locals.user){
+      res.redirect('/');
+    } else {
+      res.render('event');
+    }
+  });
 
   // Event
 
@@ -209,7 +240,7 @@ module.exports = function (app, host, port, sessionSecret) {
     		}
       }
     });
-    
+
     Users.findOne({username:res.locals.user.username}, function (err,userdata) {
       if(err || !userdata) {
             console.log('Error saving task to the database.');
@@ -232,7 +263,7 @@ module.exports = function (app, host, port, sessionSecret) {
   			res.redirect('/');
   		}
   	});
-  	
+
     Users.findOne({username:res.locals.user.username}, function (err,userdata) {
       if(err || !userdata) {
             console.log('Error saving task to the database.');
@@ -299,7 +330,7 @@ module.exports = function (app, host, port, sessionSecret) {
         res.redirect('/');
       }
     });
-    
+
     Users.findOne({username:res.locals.user.username}, function (err,userdata) {
       if(err || !userdata) {
             console.log('Error saving task to the database.');
