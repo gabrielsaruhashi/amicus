@@ -36,10 +36,10 @@
 						<li style="white-space: nowrap;"><a href="http://ab-blog.herokuapp.com">Blog</a></li>
 						<% if (locals.user) { %>
 						<li class="opener" style="user-select: none; cursor: pointer; white-space: nowrap;">
-							<a href="#" class="icon fa-angle-down"><%=locals.user.username%></a>
-						<ul style="user-select: none; display: none; position: absolute;" class="dropdown-menu">
+							<a class="icon fa-angle-down"><%=locals.user.username%></a>
+						<ul style="user-select: none; display: none; position: absolute;">
 								<li style="white-space: nowrap;"><a href="/profile/<%=locals.user.username%>" style="display: block;">Profile</a></li>
-								<li style="white-space: nowrap;"><a href="#" style="display: block;">My Events</a></li>
+								<li style="white-space: nowrap;"><a href="/myevent" style="display: block;">My Events</a></li>
 								<!-- Submenu if needed -->
 								<!-- <li class="opener" style="user-select: none; cursor: pointer; white-space: nowrap;">
 									<a href="#" style="display: block;">Submenu</a>
