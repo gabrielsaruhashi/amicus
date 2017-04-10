@@ -43,6 +43,13 @@ function addNewUser(account, req, res, next){
       newUser.classyear = "";
       newUser.phone = "";
       newUser.interests = "";
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date+' '+time;
+      newUser.last_login = dateTime;
+      newUser.events_joined = 0;
+      newUser.events_created = 0;
 
       newUser.save(function(err, userdata){
 
@@ -86,7 +93,22 @@ module.exports = function (app, host, port, sessionSecret) {
     application: {
       href: stormpathInfo.href
     },
-    postRegistrationHandler: addNewUser
+    postRegistrationHandler: addNewUser,
+    postLoginHandler: function (account, req, res, next) {
+    Users.findOne({username:account.username}, function (err,userdata) {
+      if(err || !userdata) {
+            console.log('Error saving task to the database.');
+      }
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date+' '+time;
+      userdata.last_login = dateTime;
+      userdata.save();
+    next();
+    });
+  }
+
   }));
 
   app.get('/', stormpath.getUser, loadAllEvents, function(req, res) {
@@ -187,10 +209,18 @@ module.exports = function (app, host, port, sessionSecret) {
     		}
       }
     });
+    
+    Users.findOne({username:res.locals.user.username}, function (err,userdata) {
+      if(err || !userdata) {
+            console.log('Error saving task to the database.');
+      }
+      userdata.events_created = userdata.events_created + 1;
+      userdata.save();
+    });
   });
 
   // Delete an event
-  app.post('/event/delete/:id', function(req, res) {
+  app.post('/event/delete/:id', stormpath.getUser, function(req, res) {
 
     Event.findById(req.params.id, function(err, eventToRemove) {
   		if(err || !eventToRemove) {
@@ -202,6 +232,14 @@ module.exports = function (app, host, port, sessionSecret) {
   			res.redirect('/');
   		}
   	});
+  	
+    Users.findOne({username:res.locals.user.username}, function (err,userdata) {
+      if(err || !userdata) {
+            console.log('Error saving task to the database.');
+      }
+      userdata.events_created = userdata.events_created - 1;
+      userdata.save();
+    });
   });
 
   // Join an event
@@ -236,6 +274,13 @@ module.exports = function (app, host, port, sessionSecret) {
         res.redirect('/');
       }
     });
+    Users.findOne({username:res.locals.user.username}, function (err,userdata) {
+      if(err || !userdata) {
+            console.log('Error saving task to the database.');
+      }
+      userdata.events_joined = userdata.events_joined + 1;
+      userdata.save();
+    });
 
   });
 
@@ -253,6 +298,14 @@ module.exports = function (app, host, port, sessionSecret) {
         eventToJoin.save();
         res.redirect('/');
       }
+    });
+    
+    Users.findOne({username:res.locals.user.username}, function (err,userdata) {
+      if(err || !userdata) {
+            console.log('Error saving task to the database.');
+      }
+      userdata.events_joined = userdata.events_joined - 1;
+      userdata.save();
     });
 
   });

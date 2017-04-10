@@ -16,7 +16,10 @@ const UserSchema = new Schema({
   college: stringField,
   classyear: stringField,
   phone: stringField,
-  interests: stringField
+  interests: stringField,
+  last_login: stringField,
+  events_joined: Number,
+  events_created: Number
 });
 
 module.exports = mongoose.model('User', UserSchema);
