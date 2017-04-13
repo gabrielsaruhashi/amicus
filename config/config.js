@@ -223,6 +223,7 @@ module.exports = function (app, host, port, sessionSecret) {
     newEvent.owner = res.locals.user.fullName;
     newEvent.name = req.body.name;
     newEvent.type = req.body.type;
+    newEvent.description = req.body.description;
     newEvent.day = req.body.day;
     newEvent.place = req.body.place;
     newEvent.time = req.body.time;

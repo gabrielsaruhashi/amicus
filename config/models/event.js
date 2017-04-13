@@ -15,6 +15,7 @@ const EventSchema = new Schema({
   owner: stringField,
   name: stringField,
   type: stringField,
+  description: stringField,
   place: stringField,
   day: stringField,
   time: stringField,
