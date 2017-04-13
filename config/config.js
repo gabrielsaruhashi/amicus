@@ -211,7 +211,7 @@ module.exports = function (app, host, port, sessionSecret) {
     if(!res.locals.user){
       res.redirect('/');
     } else {
-      res.render('create_event');
+      res.render('events/create');
     }
   });
 
