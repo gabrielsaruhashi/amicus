@@ -367,9 +367,9 @@ module.exports = function (app, host, port, sessionSecret) {
 
           if(event && !err){
             if(err || !event) {
-        			res.render('/', { errors: 'Error saving task to the database.'} );
+        			res.render('/admin', { errors: 'Error saving task to the database.'} );
         		} else {
-        			res.redirect('/');
+        			res.redirect('/admin');
         		}
           }
         });
