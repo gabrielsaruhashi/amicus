@@ -32,7 +32,8 @@
 									<!-- Event information -->
 
 									<div class="col-sm-10">
-										<%=event.type%>: <%=event.name%>, <%=event.place%>.<br/>
+										<a href="event/<%=event._id%>"><%=event.name%>.</a> <br/>
+										<%=event.type%>. <%=event.place%>. <br/>
 										<b> On <%=event.day%> at <%=event.time%> </b><br/>
 										Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %></a><br>
 										<%=event.member_name.length%> Joined.
