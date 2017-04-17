@@ -7,7 +7,7 @@
         <div class="12u">
           <section class="box">
             <h3>User Profile</h3>
-            <form class="updateprofile" action="/<%=locals.userdata.username%>/profile/edit" method="POST">
+            <form action="/<%=locals.userdata.username%>/profile/edit" method="post">
               <!-- 1st row: username and email -->
               <div class="row uniform 50%">
                 <div class="6u 12u(mobilep)">
@@ -23,11 +23,11 @@
               <div class="row uniform 50%">
                 <div class="6u 12u(mobilep)">
                   <a>First Name</a>
-                  <input name="firstname" type="text" value="<%=locals.userdata.firstname%>" readonly>
+                  <input name="firstname" type="text" value="<%=locals.userdata.firstname%>">
                 </div>
                 <div class="6u 12u(mobilep)">
                   <a>Last Name</a>
-                  <input name="lastname" type="text" value="<%=locals.userdata.lastname%>" readonly>
+                  <input name="lastname" type="text" value="<%=locals.userdata.lastname%>">
                 </div>
               </div>
               <!-- 3rd row: college and classyear -->
