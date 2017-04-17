@@ -10,6 +10,7 @@ const stringField = {
 
 const UserSchema = new Schema({
   username: stringField,
+  type: stringField,
   firstname: stringField,
   lastname: stringField,
   email: stringField,

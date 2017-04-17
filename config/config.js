@@ -12,8 +12,8 @@ mongoose.connect(configDB.url); // connect to our database
 
 // require models
 const Event = require('./models/event.js');
-
 const Users = require('./models/userdata.js');
+const EventTypes = require('./models/event_type.js');
 
   // Load all events
   function loadAllEvents(req, res, next) {
@@ -135,14 +135,6 @@ module.exports = function (app, host, port, sessionSecret) {
   app.get('/', stormpath.getUser, loadAllEvents, function(req, res) {
     res.locals.types = EventTypes;
     res.render('index');
-  });
-
-  app.get('/admin', stormpath.getUser, loadAllEvents, function(req, res) {
-    if(res.locals.user.username == "duc158" || "enrico" || "gabriel") {
-      res.render('admin');
-    } else {
-      res.redirect('/');
-    }
   });
 
   // User
@@ -289,23 +281,6 @@ module.exports = function (app, host, port, sessionSecret) {
     });
 
     // Join an event
-    app.get('/event/feature/:id', stormpath.getUser, function(req, res) {
-
-      Event.findById(req.params.id, function(err, eventToFeature) {
-        if(err || !eventToFeature) {
-          console.log('Error finding task on database.');
-          res.redirect('/admin');
-        }
-        else {
-          eventToFeature.feature = 1 - eventToFeature.feature;
-          eventToFeature.save();
-          res.redirect('/admin');
-        }
-      });
-
-    });
-
-    // Join an event
     app.get('/event/join/:id', stormpath.getUser, function(req, res) {
 
       Event.findById(req.params.id, function(err, eventToJoin) {
@@ -355,5 +330,34 @@ module.exports = function (app, host, port, sessionSecret) {
       });
 
     });
+
+    // Admin function
+
+      // Admin page
+      app.get('/admin', stormpath.getUser, loadAllEvents, function(req, res) {
+        if(res.locals.user.username == "duc158" || "enrico" || "gabriel") {
+          res.render('admin');
+        } else {
+          res.redirect('/');
+        }
+      });
+
+      // Feature an event
+      app.post('/event/feature/:id', stormpath.getUser, function(req, res) {
+
+        Event.findById(req.params.id, function(err, eventToFeature) {
+          if(err || !eventToFeature) {
+            console.log('Error finding task on database.');
+            res.redirect('/admin');
+          }
+          else {
+            eventToFeature.feature = 1 - eventToFeature.feature;
+            eventToFeature.save();
+            res.redirect('/admin');
+          }
+        });
+
+      });
+
 
 }
