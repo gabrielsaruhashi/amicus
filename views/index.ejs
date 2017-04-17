@@ -34,7 +34,7 @@
 									<div class="col-sm-10">
 										<a href="event/<%=event._id%>"><%=event.name%>.</a> <br/>
 										<%=event.type%>. <%=event.place%>. <br/>
-										<b> On <%=event.day%> at <%=event.time%> </b><br/>
+										On <%=event.day%> at <%=event.time%><br/>
 										Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %></a><br>
 										<%=event.member_name.length%> Joined.
 										<%for (i = 0; i < event.member_name.length; i++){%><a href="/<%=event.member_username[i]%>/profile"><%=event.member_name[i]%></a><%if (i !=  event.member_name.length - 1) { %>, <% } } %>
@@ -64,6 +64,7 @@
 
 
 			</section>
+
 			<section id="eventAll" class="box">
 				<!-- List of Events -->
 				<% if (locals.event) { %>
@@ -74,8 +75,8 @@
 
 								<!-- Event information -->
 								<div class="col-sm-10">
-									<%=event.type%>: <%=event.name%>, <%=event.place%>.<br/>
-									<b> On <%=event.day%> at <%=event.time%> </b><br/>
+									<a href="event/<%=event._id%>"><h4><%=event.name%></h4></a>
+									<b><%=event.place%> on <%=event.day%> at <%=event.time%></b><br/>
 									Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %></a><br>
 									<%=event.member_name.length%> Joined.
 									<%for (i = 0; i < event.member_name.length; i++){%><a href="/<%=event.member_username[i]%>/profile"><%=event.member_name[i]%></a><%if (i !=  event.member_name.length - 1) { %>, <% } } %>
