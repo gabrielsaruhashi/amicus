@@ -52,11 +52,13 @@
 								</li> -->
 							</ul></li>
 							<li>
-								<a href="/event/create" class="button">Create An Event</a>
+								<form action="/event/create" method="get">
+									<input class="button special" type="submit" value="Create Event"/>
+								</form>
 							</li>
 							<li style="white-space: nowrap;">
 								<form action="/logout" method="post">
-									<input class="button" type="submit" value="Logout"/>
+									<input class="button special" type="submit" value="Sign Out"/>
 								</form>
 							</li>
 							<% } else { %>
