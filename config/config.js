@@ -205,139 +205,155 @@ module.exports = function (app, host, port, sessionSecret) {
 
   // Event
 
-  // Create a new event
-  app.get('/event/create', stormpath.getUser, loadAllEvents, function(req, res) {
-    res.locals.types = EventTypes;
-    if(!res.locals.user){
-      res.redirect('/');
-    } else {
-      res.render('events/create');
-    }
-  });
+    // Create a new event
+    app.get('/event/create', stormpath.getUser, loadAllEvents, function(req, res) {
+      res.locals.types = EventTypes;
+      if(!res.locals.user){
+        res.redirect('/');
+      } else {
+        res.render('events/create');
+      }
+    });
 
-  app.post('/event/create', stormpath.getUser, function (req, res) {
+    app.post('/event/create', stormpath.getUser, function (req, res) {
 
-  	var newEvent = new Event();
-    newEvent.owner_id = res.locals.user.href;
-    newEvent.owner_username = res.locals.user.username;
-    newEvent.owner = res.locals.user.fullName;
-    newEvent.name = req.body.name;
-    newEvent.type = req.body.type;
-    newEvent.description = req.body.description;
-    newEvent.day = req.body.day;
-    newEvent.place = req.body.place;
-    newEvent.time = req.body.time;
-    newEvent.feature = 0;
+    	var newEvent = new Event();
+      newEvent.owner_id = res.locals.user.href;
+      newEvent.owner_username = res.locals.user.username;
+      newEvent.owner = res.locals.user.fullName;
+      newEvent.name = req.body.name;
+      newEvent.type = req.body.type;
+      newEvent.description = req.body.description;
+      newEvent.day = req.body.day;
+      newEvent.place = req.body.place;
+      newEvent.time = req.body.time;
+      newEvent.feature = 0;
 
-    newEvent.save(function(err, event){
+      newEvent.save(function(err, event){
 
-      if(event && !err){
-        if(err || !event) {
-    			res.render('/', { errors: 'Error saving task to the database.'} );
-    		} else {
+        if(event && !err){
+          if(err || !event) {
+      			res.render('/', { errors: 'Error saving task to the database.'} );
+      		} else {
+      			res.redirect('/');
+      		}
+        }
+      });
+
+      Users.findOne({username:res.locals.user.username}, function (err,userdata) {
+        if(err || !userdata) {
+              console.log('Error saving task to the database.');
+        }
+        userdata.events_created = userdata.events_created + 1;
+        userdata.save();
+      });
+    });
+
+    // Delete an event
+    app.get('/event/:id', stormpath.getUser, function(req, res) {
+
+      Event.findById(req.params.id, function(err, event) {
+    		if(err || !event) {
+    			console.log('Error finding task on database.');
     			res.redirect('/');
     		}
-      }
+    		else {
+    			res.locals.event = event;
+    			res.render('events/detail');
+    		}
+    	});
+
     });
 
-    Users.findOne({username:res.locals.user.username}, function (err,userdata) {
-      if(err || !userdata) {
-            console.log('Error saving task to the database.');
-      }
-      userdata.events_created = userdata.events_created + 1;
-      userdata.save();
-    });
-  });
+    // Delete an event
+    app.post('/event/delete/:id', stormpath.getUser, function(req, res) {
 
-  // Delete an event
-  app.post('/event/delete/:id', stormpath.getUser, function(req, res) {
+      Event.findById(req.params.id, function(err, eventToRemove) {
+    		if(err || !eventToRemove) {
+    			console.log('Error finding task on database.');
+    			res.redirect('/');
+    		}
+    		else {
+    			eventToRemove.remove();
+    			res.redirect('/');
+    		}
+    	});
 
-    Event.findById(req.params.id, function(err, eventToRemove) {
-  		if(err || !eventToRemove) {
-  			console.log('Error finding task on database.');
-  			res.redirect('/');
-  		}
-  		else {
-  			eventToRemove.remove();
-  			res.redirect('/');
-  		}
-  	});
-
-    Users.findOne({username:res.locals.user.username}, function (err,userdata) {
-      if(err || !userdata) {
-            console.log('Error saving task to the database.');
-      }
-      userdata.events_created = userdata.events_created - 1;
-      userdata.save();
-    });
-  });
-
-  // Join an event
-  app.post('/event/feature/:id', stormpath.getUser, function(req, res) {
-
-    Event.findById(req.params.id, function(err, eventToFeature) {
-      if(err || !eventToFeature) {
-        console.log('Error finding task on database.');
-        res.redirect('/admin');
-      }
-      else {
-        eventToFeature.feature = 1 - eventToFeature.feature;
-        eventToFeature.save();
-        res.redirect('/admin');
-      }
+      Users.findOne({username:res.locals.user.username}, function (err,userdata) {
+        if(err || !userdata) {
+              console.log('Error saving task to the database.');
+        }
+        userdata.events_created = userdata.events_created - 1;
+        userdata.save();
+      });
     });
 
-  });
+    // Join an event
+    app.post('/event/feature/:id', stormpath.getUser, function(req, res) {
 
-  // Join an event
-  app.post('/event/join/:id', stormpath.getUser, function(req, res) {
+      Event.findById(req.params.id, function(err, eventToFeature) {
+        if(err || !eventToFeature) {
+          console.log('Error finding task on database.');
+          res.redirect('/admin');
+        }
+        else {
+          eventToFeature.feature = 1 - eventToFeature.feature;
+          eventToFeature.save();
+          res.redirect('/admin');
+        }
+      });
 
-    Event.findById(req.params.id, function(err, eventToJoin) {
-      if(err || !eventToJoin) {
-        console.log('Error finding task on database.');
-        res.redirect('/');
-      }
-      else {
-        eventToJoin.member_username.push(res.locals.user.username);
-        eventToJoin.member_name.push(res.locals.user.fullName);
-        eventToJoin.save();
-        res.redirect('/');
-      }
-    });
-    Users.findOne({username:res.locals.user.username}, function (err,userdata) {
-      if(err || !userdata) {
-            console.log('Error saving task to the database.');
-      }
-      userdata.events_joined = userdata.events_joined + 1;
-      userdata.save();
     });
 
-  });
+    // Join an event
+    app.post('/event/join/:id', stormpath.getUser, function(req, res) {
 
-  // Withdraw from an event
-  app.post('/event/withdraw/:id', stormpath.getUser, function(req, res) {
+      Event.findById(req.params.id, function(err, eventToJoin) {
+        if(err || !eventToJoin) {
+          console.log('Error finding task on database.');
+          res.redirect('/');
+        }
+        else {
+          eventToJoin.member_username.push(res.locals.user.username);
+          eventToJoin.member_name.push(res.locals.user.fullName);
+          eventToJoin.save();
+          res.redirect('/');
+        }
+      });
+      Users.findOne({username:res.locals.user.username}, function (err,userdata) {
+        if(err || !userdata) {
+              console.log('Error saving task to the database.');
+        }
+        userdata.events_joined = userdata.events_joined + 1;
+        userdata.save();
+      });
 
-    Event.findById(req.params.id, function(err, eventToJoin) {
-      if(err || !eventToJoin) {
-        console.log('Error finding task on database.');
-        res.redirect('/');
-      }
-      else {
-        eventToJoin.member_username.pull(res.locals.user.username);
-        eventToJoin.member_name.pull(res.locals.user.fullName);
-        eventToJoin.save();
-        res.redirect('/');
-      }
     });
 
-    Users.findOne({username:res.locals.user.username}, function (err,userdata) {
-      if(err || !userdata) {
-            console.log('Error saving task to the database.');
-      }
-      userdata.events_joined = userdata.events_joined - 1;
-      userdata.save();
-    });
+    // Withdraw from an event
+    app.post('/event/withdraw/:id', stormpath.getUser, function(req, res) {
 
-  });
+      Event.findById(req.params.id, function(err, eventToJoin) {
+        if(err || !eventToJoin) {
+          console.log('Error finding task on database.');
+          res.redirect('/');
+        }
+        else {
+          eventToJoin.member_username.pull(res.locals.user.username);
+          eventToJoin.member_name.pull(res.locals.user.fullName);
+          eventToJoin.save();
+          res.redirect('/');
+        }
+      });
+
+      Users.findOne({username:res.locals.user.username}, function (err,userdata) {
+        if(err || !userdata) {
+              console.log('Error saving task to the database.');
+        }
+        userdata.events_joined = userdata.events_joined - 1;
+        userdata.save();
+      });
+
+    });
 
 }
