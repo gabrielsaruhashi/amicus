@@ -13,7 +13,7 @@ mongoose.connect(configDB.url); // connect to our database
 // require models
 const Event = require('./models/event.js');
 const Users = require('./models/userdata.js');
-const EventTypes = require('./models/event_type.js');
+const eventType = require('./models/event_type.js');
 
   // Load all events
   function loadAllEvents(req, res, next) {
@@ -24,6 +24,24 @@ const EventTypes = require('./models/event_type.js');
     Event.find( function(err, event) {
         if(!err) {
           res.locals.event = event;
+        }
+        else {
+          res.redirect('/');
+        }
+        next();
+      }
+    );
+  }
+
+  // Load all event type
+  function loadAllEventTypes(req, res, next) {
+    if(!res.locals.user) {
+      return next();
+    }
+
+    eventType.find( function(err, eventType) {
+        if(!err) {
+          res.locals.types = eventType;
         }
         else {
           res.redirect('/');
@@ -85,8 +103,6 @@ function addNewUser(account, req, res, next){
 
 module.exports = function (app, host, port, sessionSecret) {
 
-  var EventTypes = require('./eventtype.js');
-
   // Configure our app
   app.use(cookieParser()); // read cookies (needed for auth)
   app.use(bodyParser.json()); // get information from html forms
@@ -132,8 +148,7 @@ module.exports = function (app, host, port, sessionSecret) {
 
   }));
 
-  app.get('/', stormpath.getUser, loadAllEvents, function(req, res) {
-    res.locals.types = EventTypes;
+  app.get('/', stormpath.getUser, loadAllEvents, loadAllEventTypes, function(req, res) {
     res.render('index');
   });
 
@@ -334,12 +349,30 @@ module.exports = function (app, host, port, sessionSecret) {
     // Admin function
 
       // Admin page
-      app.get('/admin', stormpath.getUser, loadAllEvents, function(req, res) {
+      app.get('/admin', stormpath.getUser, loadAllEvents, loadAllEventTypes, function(req, res) {
         if(res.locals.user.username == "duc158" || "enrico" || "gabriel") {
           res.render('admin');
         } else {
           res.redirect('/');
         }
+      });
+
+      // Create new event type
+      app.post('/admin/event/type/add', stormpath.getUser, function (req, res) {
+
+      	var newEventType = new eventType();
+        newEventType.name = req.body.name;
+
+        newEventType.save(function(err, event){
+
+          if(event && !err){
+            if(err || !event) {
+        			res.render('/', { errors: 'Error saving task to the database.'} );
+        		} else {
+        			res.redirect('/');
+        		}
+          }
+        });
       });
 
       // Feature an event

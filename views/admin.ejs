@@ -4,20 +4,21 @@
 
 		<section class="container">
 
-			<header class="major">
-				<h2>Admin Panel</h2>
-			</header>
-
 			<div class="row">
         <div class="12u">
 					<section class="box">
-						<h3>Create New Event</h3>
+						<h5>All Categories</h5>
+						<ul>
+							<% types.forEach(function(types) { %>
+								<li><%=types.name%></li>
+							<% }); %>
+						</ul>
 						<!-- Add new Category -->
 						<form action="/admin/event/type/add" method="post">
 							<div class="row uniform 50%">
 								<div class="12u">
 									<a>Event Type</a>
-									<input name="event_type" type="text">
+									<input name="name" type="text" placeholder="Event type name">
 								</div>
 							</div>
 							<div class="row uniform 50%">
