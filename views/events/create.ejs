@@ -31,10 +31,26 @@
                 </div>
                 <div class="row uniform 50%">
                   <div class="6u 12u(mobilep)">
-                    <input class="datepicker" type="text" name="day" placeholder="Date">
+                    <input class="datepicker" name="day" type="text" value="Pick a date">
+                      <script type="text/javascript">
+                        $( '.datepicker' ).pickadate({
+                          formatSubmit: 'yyyy/mm/dd',
+                          closeOnSelect: false,
+                          closeOnClear: false,
+                        })
+                        var picker = $input.pickadate('picker')
+                      </script>
                   </div>
                   <div class="6u 12u(mobilep) input-group bootstrap-timepicker timepicker">
-                    <input class="timepicker" type="text" name="time" placeholder="Time">
+                    <input class="timepicker" type="text" name="time" placeholder="PIck a time">
+                    <script type="text/javascript">
+                      $( '.timepicker' ).pickatime({
+                        formatSubmit: 'hh:mm',
+                        closeOnSelect: false,
+                        closeOnClear: false,
+                      })
+                      var picker = $input.pickatime('picker')
+                    </script>
                   </div>
                 </div>
                 <div class="row uniform 50%">
