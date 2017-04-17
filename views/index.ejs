@@ -12,21 +12,23 @@
 			<section id="eventFeature" class="box">
 
 				<!-- Highlighted Categories -->
-				<div class="row no-collapse 50% uniform">
-					<div class="4u">
-						<span class="image fit">
-							<img src="images/today.png" alt=""/>
-						</span>
-					</div>
-					<div class="4u">
-						<span class="image fit">
-							<img src="images/movie.png" alt=""/>
-						</span>
-					</div>
-					<div class="4u">
-						<span class="image fit">
-							<img src="images/basketball.png" alt=""/>
-						</span>
+				<div class="box alt">
+					<div class="row no-collapse 50% uniform">
+						<div class="4u">
+							<span class="image fit">
+								<img src="images/today.png" alt=""/>
+							</span>
+						</div>
+						<div class="4u">
+							<span class="image fit">
+								<img src="images/movie.png" alt=""/>
+							</span>
+						</div>
+						<div class="4u">
+							<span class="image fit">
+								<img src="images/basketball.png" alt=""/>
+							</span>
+						</div>
 					</div>
 				</div>
 
@@ -48,11 +50,11 @@
 										</td>
 										<td>
 											<% if (event.owner_id == user.href) { %>
-												<a href="/event/delete/<%=event.id%>" class="btn btn-link">Delete</a>
+												<a href="/event/delete/<%=event.id%>" class="button special fit small">Delete</a>
 											<% } else if (event.member_username.indexOf(user.username) > -1 ) { %>
-												<a href="/event/withdraw/<%=event.id%>" class="btn btn-link">Withdraw</a>
+												<a href="/event/withdraw/<%=event.id%>" class="button special fit small">Withdraw</a>
 											<% } else { %>
-												<a href="/event/join/<%=event.id%>" class="btn btn-link">Join</a>
+												<a href="/event/join/<%=event.id%>" class="button special fit small">Join</a>
 											<% } %>
 										</td>
 									</tr>

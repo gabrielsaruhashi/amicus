@@ -1998,6 +1998,8 @@
 	}
 
 	input[type="text"],
+	input[type="date"],
+	input[type="time"],
 	input[type="password"],
 	input[type="email"],
 	select,
@@ -2018,6 +2020,8 @@
 	}
 
 		input[type="text"]:invalid,
+		input[type="date"]:invalid,
+		input[type="time"]:invalid,
 		input[type="password"]:invalid,
 		input[type="email"]:invalid,
 		select:invalid,
@@ -2026,6 +2030,8 @@
 		}
 
 		input[type="text"]:focus,
+		input[type="date"]:focus,
+		input[type="time"]:focus,
 		input[type="password"]:focus,
 		input[type="email"]:focus,
 		select:focus,
@@ -2068,6 +2074,8 @@
 		}
 
 	input[type="text"],
+	input[type="date"],
+	input[type="time"],
 	input[type="password"],
 	input[type="email"],
 	select {
@@ -3196,6 +3204,8 @@
 		}
 
 		#cta input[type="text"],
+		#cta input[type="date"],
+		#cta input[type="time"],
 		#cta input[type="password"],
 		#cta input[type="email"],
 		#cta select,
@@ -3206,6 +3216,8 @@
 		}
 
 			#cta input[type="text"]:focus,
+			#cta input[type="date"]:focus,
+			#cta input[type="time"]:focus,
 			#cta input[type="password"]:focus,
 			#cta input[type="email"]:focus,
 			#cta select:focus,

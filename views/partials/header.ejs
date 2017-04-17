@@ -9,20 +9,11 @@
 		<title>We•Chilling by ancestral-bang</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-		<!-- add Bootstrap v4 CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="/assets/css/main.css" type="text/css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-
-    <!-- Font Awesome Icon Pack -->
+		<link rel="stylesheet" href="/assets/css/pickadate/default.css">
+		<link rel="stylesheet" href="/assets/css/pickadate/default.date.css">
+		<link rel="stylesheet" href="/assets/css/pickadate/default.time.css">
     <script src="https://use.fontawesome.com/b86d3ae6bd.js"></script>
-
 	</head>
 
 	<body class="landing">
@@ -36,22 +27,13 @@
 						<li style="white-space: nowrap;"><a href="http://ab-blog.herokuapp.com">Blog</a></li>
 						<li style="white-space: nowrap;"> | </li>
 						<% if (locals.user) { %>
-						<li class="opener" style="user-select: none; cursor: pointer; white-space: nowrap;">
-							<a href="#" class="icon fa-angle-down"><%=locals.user.username%></a>
-						<ul style="user-select: none; display: none; position: absolute;">
-								<li style="white-space: nowrap;"><a href="/<%=locals.user.username%>/profile" style="display: block;">Profile</a></li>
-								<li style="white-space: nowrap;"><a href="/<%=locals.user.username%>/event" style="display: block;">My Events</a></li>
-								<!-- Submenu if needed -->
-								<!-- <li class="opener" style="user-select: none; cursor: pointer; white-space: nowrap;">
-									<a href="#" style="display: block;">Submenu</a>
-									<ul style="user-select: none; display: none; position: absolute;" class="dropotron">
-										<li style="white-space: nowrap;"><a href="#" style="display: block;">Option One</a></li>
-										<li style="white-space: nowrap;"><a href="#" style="display: block;">Option Two</a></li>
-										<li style="white-space: nowrap;"><a href="#" style="display: block;">Option Three</a></li>
-										<li style="white-space: nowrap;"><a href="#" style="display: block;">Option Four</a></li>
-									</ul>
-								</li> -->
-							</ul></li>
+							<li class="opener" style="user-select: none; cursor: pointer; white-space: nowrap; opacity: 1;">
+								<a href="#" class="icon fa-angle-down"><%=locals.user.username%></a>
+								<ul style="user-select: none; display: none;">
+									<li style="white-space: nowrap;"><a href="/<%=locals.user.username%>/profile" style="display: block;">Profile</a></li>
+									<li style="white-space: nowrap;"><a href="/<%=locals.user.username%>/event" style="display: block;">My Events</a></li>
+								</ul>
+							</li>
 							<li>
 								<form action="/event/create" method="get">
 									<input class="button special" type="submit" value="Create Event"/>
@@ -62,10 +44,10 @@
 									<input class="button special" type="submit" value="Sign Out"/>
 								</form>
 							</li>
-							<% } else { %>
-								<li style="white-space: nowrap;"><a href="/login" class="button">Login</a></li>
-								<li style="white-space: nowrap;"><a href="/register" class="button">Register</a></li>
-							<% } %>
+						<% } else { %>
+							<li style="white-space: nowrap;"><a href="/login" class="button">Login</a></li>
+							<li style="white-space: nowrap;"><a href="/register" class="button">Register</a></li>
+						<% } %>
 					</ul>
 				</nav>
 			</header>

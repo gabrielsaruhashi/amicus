@@ -4,41 +4,58 @@
 
     <!-- Welcome -->
     <section class="container">
-      <section id="welcome" class="box">
-        <div class="col-sm-12">
-          <!-- Error message -->
-          <% if (locals.errors) { %>
-            <p class="errors alert alert-warning"><%= errors %></p>
-          <% } %>
-
+      <div class="row">
+        <div class="12u">
           <!-- Create an Event -->
-          <form action="/event/create" method="POST">
-            <div class="input-group mb-2 mr-sm-2 mb-sm-2">
-              <div class="input-group-addon"><i class="fa fa-bell" aria-hidden="true"></i></div>
-              <input class="form-control" name="name" type="text" placeholder="Event name">
-            </div>
-            <div class="input-group mb-2 mr-sm-2 mb-sm-2">
-              <div class="input-group-addon"><i class="fa fa-barcode" aria-hidden="true"></i></div>
-              <input class="form-control" name="type" type="text" placeholder="What kind of event is this?">
-            </div>
-            <div class="input-group mb-2 mr-sm-2 mb-sm-2">
-              <div class="input-group-addon"><i class="fa fa-sticky-note" aria-hidden="true"></i></div>
-              <input class="form-control" name="description" type="text" placeholder="Description">
-            </div>
-            <div class="input-group mb-2 mr-sm-2 mb-sm-2">
-              <div class="input-group-addon"><i class="fa fa-building" aria-hidden="true"></i></div>
-              <input class="form-control" name="place" type="text" placeholder="Place">
-            </div>
-              <div class="input-group mb-2 mr-sm-2 mb-sm-2">
-                <div class="input-group-addon"><i class="fa fa-calendar-times-o" aria-hidden="true"></i></div>
-                <input class="form-control" name="day" type="date">
-                <div class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
-                <input class="form-control" name="time" type="time">
-              </div>
-            <input type="submit" class="btn btn-primary">
-          </form>
+          <section class="box">
+            <h3>Create New Event</h3>
+            <form method="post" action="/event/create">
+              <fieldset>
+                <div class="row uniform 50%">
+                  <div class="6u 12u(mobilep)">
+                    <input type="text" name="name" placeholder="Name">
+                  </div>
+                  <div class="6u 12u(mobilep)">
+                    <input type="email" name="email" placeholder="Email">
+                  </div>
+                </div>
+                <div class="row uniform 50%">
+                  <div class="12u">
+                    <input type="text" name="description" placeholder="Description">
+                  </div>
+                </div>
+                <div class="row uniform 50%">
+                  <div class="12u">
+                    <input type="text" name="place" placeholder="Place">
+                  </div>
+                </div>
+                <div class="row uniform 50%">
+                  <div class="6u 12u(mobilep)">
+                    <input
+                      class="datepicker"
+                      name="day"
+                      type="text"
+                      autofocus
+                      value="14 August, 2017">
+                  </div>
+                  <div class="6u 12u(mobilep)">
+                    <input type="time" name="time" placeholder="Time">
+                  </div>
+                </div>
+                <div class="row uniform 50%">
+                  <div class="12u">
+                    <ul class="actions">
+                      <li>
+                        <input type="submit" class="button">
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </section>
         </div>
-      </section>
+      </div>
     </section>
   <% } %>
 
