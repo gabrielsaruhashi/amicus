@@ -75,7 +75,7 @@
 								<!-- Event information -->
 								<div class="col-sm-10">
 									<header>
-										<h3><a href="event/<%=event._id%>"><%=event.name%></a></h3>
+										<h4><a href="event/<%=event._id%>"><%=event.name%></a></h4>
 										<p><%=event.place%> on <%=event.day%> at <%=event.time%></p>
 									</header>
 									<p>Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %></a><br>
