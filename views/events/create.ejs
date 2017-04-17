@@ -13,10 +13,10 @@
               <fieldset>
                 <div class="row uniform 50%">
                   <div class="6u 12u(mobilep)">
-                    <input type="text" name="name" placeholder="Name">
+                    <input type="text" name="name" placeholder="Event name">
                   </div>
                   <div class="6u 12u(mobilep)">
-                    <input type="email" name="email" placeholder="Email">
+                    <input type="text" name="type" placeholder="Event type">
                   </div>
                 </div>
                 <div class="row uniform 50%">
@@ -33,8 +33,11 @@
                   <div class="6u 12u(mobilep)">
                     <input type="date" name="day" placeholder="Date">
                   </div>
-                  <div class="6u 12u(mobilep)">
-                    <input type="time" name="time" placeholder="Time">
+                  <div class="6u 12u(mobilep) input-group bootstrap-timepicker timepicker">
+                    <input id="timepicker" type="text" name="time" placeholder="Time">
+                    <script type="text/javascript">
+                      $('#timepicker').timepicker();
+                    </script>
                   </div>
                 </div>
                 <div class="row uniform 50%">
