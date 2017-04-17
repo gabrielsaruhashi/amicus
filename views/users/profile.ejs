@@ -1,0 +1,87 @@
+<% include ../partials/header.ejs %>
+
+  <% if (userid == locals.userdata.username) { %>
+
+    <section class="container">
+      <section id="welcome" class="box">
+        <div class="col-sm-12">
+          <div class="card card-block">
+            <form class="updateprofile" action="/<%=locals.userdata.username%>/profile/edit" method="POST">
+              <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+                <div style="width: 150px" class="input-group-addon"><a>Username</a></div>
+                <input class="form-control" name="username" type="text" placeholder="Username" value="<%=locals.userdata.username%>" readonly>
+              </div>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+                <div style="width: 150px" class="input-group-addon"><a>Name</a></div>
+                <input class="form-control" name="fullname" type="text" placeholder="Name" value="<%=locals.userdata.firstname%> <%=locals.userdata.lastname%>" readonly>
+              </div>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+                <div style="width: 150px" class="input-group-addon"><a>E-mail</a></div>
+                <input class="form-control" name="email" type="text" placeholder="E-mail" value="<%=locals.userdata.email%>" readonly>
+              </div>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+                <div style="width: 150px" class="input-group-addon"><a>Class Year</a></div>
+                <input class="form-control" name="classyear" type="text" placeholder="Class Year" value="<%=locals.userdata.classyear%>">
+              </div>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+                <div style="width: 150px" class="input-group-addon"><a>Residential College</a></div>
+                <input class="form-control" name="college" type="text" placeholder="Residential College" value="<%=locals.userdata.college%>">
+              </div>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+                <div style="width: 150px" class="input-group-addon"><a>Phone Number</a></div>
+                <input class="form-control" name="phone" type="text" placeholder="Phone Number" value="<%=locals.userdata.phone%>">
+              </div>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+                <div style="width: 150px" class="input-group-addon"><a>Interests</a></div>
+                <input class="form-control" name="interests" type="text" placeholder="Interests" value="<%=locals.userdata.interests%>">
+              </div>
+              <button type="submit" class="btn btn-primary" value="Submit">Save Changes</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <% } else { %>
+
+      <section class="container">
+        <br>
+        <section id="welcome" class="box">
+          <div class="col-sm-12">
+            <div class="card card-block">
+              <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+                <div style="width: 150px" class="input-group-addon"><a>Username</a></div>
+                <input class="form-control" name="username" type="text" placeholder="Username" value="<%=locals.userdata.username%>" disabled>
+              </div>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+                <div style="width: 150px" class="input-group-addon"><a>Name</a></div>
+                <input class="form-control" name="firstname" type="text" placeholder="Name" value="<%=locals.userdata.firstname%> <%=locals.userdata.lastname%>" disabled>
+              </div>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+                <div style="width: 150px" class="input-group-addon"><a>E-mail</a></div>
+                <input class="form-control" name="email" type="text" placeholder="E-mail" value="<%=locals.userdata.email%>" disabled>
+              </div>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+                <div style="width: 150px" class="input-group-addon"><a>Class Year</a></div>
+                <input class="form-control" name="class" type="text" placeholder="Class Year" value="<%=locals.userdata.classyear%>" disabled>
+              </div>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+                <div style="width: 150px" class="input-group-addon"><a>Residential College</a></div>
+                <input class="form-control" name="college" type="text" placeholder="Residential College" value="<%=locals.userdata.college%>" disabled>
+              </div>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+                <div style="width: 150px" class="input-group-addon"><a>Phone Number</a></div>
+                <input class="form-control" name="phone" type="text" placeholder="Phone Number" value="<%=locals.userdata.phone%>" disabled>
+              </div>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+                <div style="width: 150px" class="input-group-addon"><a>Interests</a></div>
+                <input class="form-control" name="interests" type="text" placeholder="Interests" value="<%=locals.userdata.interests%>" disabled>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+  <% } %>
+
+<% include ../partials/footer.ejs %>

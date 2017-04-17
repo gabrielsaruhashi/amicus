@@ -159,7 +159,7 @@ module.exports = function (app, host, port, sessionSecret) {
           if(userdata != null)
           {
             res.locals.userdata = userdata;
-            res.render('profile', {'userid':req.user.username});
+            res.render('users/profile', {'userid':req.user.username});
           }
           else
           {
@@ -184,7 +184,7 @@ module.exports = function (app, host, port, sessionSecret) {
             userdata.interests = req.body.interests;
             userdata.save();
             res.locals.userdata = userdata;
-            res.render('profile', {'userid':req.body.username});
+            res.render('users/profile', {'userid':req.body.username});
           }
           else
           {
@@ -199,7 +199,7 @@ module.exports = function (app, host, port, sessionSecret) {
       if(!res.locals.user){
         res.redirect('/');
       } else {
-        res.render('event');
+        res.render('users/event');
       }
     });
 
