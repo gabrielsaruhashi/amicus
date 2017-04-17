@@ -249,7 +249,7 @@ module.exports = function (app, host, port, sessionSecret) {
       });
     });
 
-    // Delete an event
+    // Show event details
     app.get('/event/:id', stormpath.getUser, function(req, res) {
 
       Event.findById(req.params.id, function(err, event) {
@@ -266,7 +266,7 @@ module.exports = function (app, host, port, sessionSecret) {
     });
 
     // Delete an event
-    app.post('/event/delete/:id', stormpath.getUser, function(req, res) {
+    app.get('/event/delete/:id', stormpath.getUser, function(req, res) {
 
       Event.findById(req.params.id, function(err, eventToRemove) {
     		if(err || !eventToRemove) {
@@ -289,7 +289,7 @@ module.exports = function (app, host, port, sessionSecret) {
     });
 
     // Join an event
-    app.post('/event/feature/:id', stormpath.getUser, function(req, res) {
+    app.get('/event/feature/:id', stormpath.getUser, function(req, res) {
 
       Event.findById(req.params.id, function(err, eventToFeature) {
         if(err || !eventToFeature) {
@@ -306,7 +306,7 @@ module.exports = function (app, host, port, sessionSecret) {
     });
 
     // Join an event
-    app.post('/event/join/:id', stormpath.getUser, function(req, res) {
+    app.get('/event/join/:id', stormpath.getUser, function(req, res) {
 
       Event.findById(req.params.id, function(err, eventToJoin) {
         if(err || !eventToJoin) {
@@ -331,7 +331,7 @@ module.exports = function (app, host, port, sessionSecret) {
     });
 
     // Withdraw from an event
-    app.post('/event/withdraw/:id', stormpath.getUser, function(req, res) {
+    app.get('/event/withdraw/:id', stormpath.getUser, function(req, res) {
 
       Event.findById(req.params.id, function(err, eventToJoin) {
         if(err || !eventToJoin) {
