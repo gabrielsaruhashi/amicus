@@ -50,11 +50,11 @@
 										</td>
 										<td>
 											<% if (event.owner_id == user.href) { %>
-												<a href="/event/delete/<%=event.id%>" class="button special fit small">Delete</a>
+												<a href="/event/delete/<%=event.id%>" class="button special fit icon fa-trash">Delete</a>
 											<% } else if (event.member_username.indexOf(user.username) > -1 ) { %>
-												<a href="/event/withdraw/<%=event.id%>" class="button special fit small">Withdraw</a>
+												<a href="/event/withdraw/<%=event.id%>" class="button fit icon fa-sign-out">Withdraw</a>
 											<% } else { %>
-												<a href="/event/join/<%=event.id%>" class="button special fit small">Join</a>
+												<a href="/event/join/<%=event.id%>" class="button special fit icon fa-star">Join</a>
 											<% } %>
 										</td>
 									</tr>
