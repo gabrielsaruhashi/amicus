@@ -171,15 +171,13 @@ module.exports = function (app, host, port, sessionSecret) {
 
     // Edit the profile page
     app.post('/:username/profile/edit', stormpath.getUser, function (req, res) {
-      
+
       Users.findOne({username:req.body.username}, function (err, userdata) {
           if (err) {
             console.log('error');
           }
           if(userdata != null)
           {
-            userdata.firstname = req.body.firstname;
-            userdata.lastname = req.body.lastname;
             userdata.college = req.body.college;
             userdata.classyear = req.body.classyear;
             userdata.phone = req.body.phone;
