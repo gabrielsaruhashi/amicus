@@ -16,7 +16,14 @@
                     <input type="text" name="name" placeholder="Event name">
                   </div>
                   <div class="6u 12u(mobilep)">
-                    <input type="text" name="type" placeholder="Event type">
+                    <div class="select-wrapper">
+  										<select name="type" id="type">
+  											<option value="">- Event Type -</option>
+                        <% types.forEach(function(types) { %>
+                          <option><%=types.name%></option>
+                        <% }); %>
+  										</select>
+										</div>
                   </div>
                 </div>
                 <div class="row uniform 50%">
