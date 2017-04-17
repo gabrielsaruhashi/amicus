@@ -213,8 +213,7 @@ module.exports = function (app, host, port, sessionSecret) {
   // Event
 
     // Create a new event
-    app.get('/event/create', stormpath.getUser, loadAllEvents, function(req, res) {
-      res.locals.types = EventTypes;
+    app.get('/event/create', stormpath.getUser, loadAllEvents, loadAllEventTypes, function(req, res) {
       if(!res.locals.user){
         res.redirect('/');
       } else {

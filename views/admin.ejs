@@ -1,67 +1,71 @@
 <% include ./partials/header.ejs %>
 
+	<section class="container">
 
+		<header class="major">
+			<h3>Administration Page</h3>
+		</header>
 
-		<section class="container">
+		<div class="row">
+			<div class="12u">
+				<section class="box">
+					<a>All Categories</a>
+					<ul>
+						<% types.forEach(function(types) { %>
+							<li><%=types.name%></li>
+						<% }); %>
+					</ul>
 
-			<div class="row">
-        <div class="12u">
-					<section class="box">
-						<a>All Categories</a>
-						<ul>
-							<% types.forEach(function(types) { %>
-								<li><%=types.name%></li>
-							<% }); %>
-						</ul>
-						<!-- Add new Category -->
-						<form action="/admin/event/type/add" method="post">
-							<div class="row uniform 50%">
-								<div class="12u">
-									<a>Event Type</a>
-									<input name="name" type="text" placeholder="Event type name">
-								</div>
+					<!-- Add new Category -->
+					<form action="/admin/event/type/add" method="post">
+						<div class="row uniform 50%">
+							<div class="12u">
+								<a>Event Type</a>
+								<input name="name" type="text" placeholder="Event type name">
 							</div>
-							<div class="row uniform 50%">
-								<div class="12u">
-									<ul class="actions">
-										<li><button type="submit" class="button" value="Submit">Add Event Type</button></li>
-									</ul>
-								</div>
+						</div>
+						<div class="row uniform 50%">
+							<div class="12u">
+								<ul class="actions">
+									<li><button type="submit" class="button" value="Submit">Add Event Type</button></li>
+								</ul>
 							</div>
-						</form>
-					</section>
-				</div>
+						</div>
+					</form>
+				</section>
 			</div>
+		</div>
 
-			<!-- List of Events -->
-			<div class="tabel-wrapper">
-				<% if (locals.event) { %>
-					<table>
-						<tbody>
-							<% event.forEach(function(event) { %>
-								<tr>
-									<td>
-										<header>
-											<h4><a href="event/<%=event._id%>"><%=event.name%></a></h4>
-											<p><%=event.place%> on <%=event.day%> at <%=event.time%></p>
-										</header>
-										Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %></a></br>
-										<%=event.member_name.length%> Joined.
-										<%for (i = 0; i < event.member_name.length; i++){%><a href="/<%=event.member_username[i]%>/profile"><%=event.member_name[i]%></a><%if (i !=  event.member_name.length - 1) { %>, <% } } %>
-									</td>
-									<td>
-										<form method="post" action="/event/feature/<%=event.id%>">
-											<button type="submit" name="feature" class="button special icon fa-thumb-tack">
-												<% if (event.feature==0) { %> Feature <% } else {%> Unfeature <%}%>
-											</button>
-										</form>
-									</td>
-								</tr>
-							<% }); %>
-						</tbody>
-					</table>
-				<% } %>
-			</div>
-		</section>
+		<!-- List of Events -->
+		<div class="tabel-wrapper">
+			<% if (locals.event) { %>
+				<table>
+					<tbody>
+						<% event.forEach(function(event) { %>
+							<tr>
+								<td>
+									<header>
+										<h4><a href="event/<%=event._id%>"><%=event.name%></a></h4>
+										<p><%=event.place%> on <%=event.day%> at <%=event.time%></p>
+									</header>
+									Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %></a></br>
+									<%=event.member_name.length%> Joined.
+									<%for (i = 0; i < event.member_name.length; i++){%><a href="/<%=event.member_username[i]%>/profile"><%=event.member_name[i]%></a><%if (i !=  event.member_name.length - 1) { %>, <% } } %>
+								</td>
+								<td>
+									<form method="post" action="/event/feature/<%=event.id%>">
+										<button type="submit" name="feature" class="button special icon fa-thumb-tack">
+											<% if (event.feature==0) { %> Feature <% } else {%> Unfeature <%}%>
+										</button>
+									</form>
+								</td>
+							</tr>
+						<% }); %>
+					</tbody>
+				</table>
+			<% } %>
+		</div>
+
+	</section>
 
 <% include ./partials/footer.ejs %>
