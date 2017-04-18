@@ -6,7 +6,6 @@
       <div class="row">
         <div class="12u">
           <section class="box">
-            <h3>User Profile</h3>
             <form action="/<%=locals.userdata.username%>/profile/edit" method="post">
               <!-- 1st row: username and email -->
               <div class="row uniform 50%">
@@ -47,15 +46,18 @@
                   <a>Phone Number</a>
                   <input name="phone" type="text" placeholder="Phone Number" value="<%=locals.userdata.phone%>">
                 </div>
-                <div class="6u 12u(mobilep)">
+              </div>
+              <!-- 5th row: Interests -->
+              <div class="row uniform 50%">
+                <div class="12u">
                   <a>Interests</a>
-                  <input id="interests" class="tags" name="interests" type="text" placeholder="Interests" value="<%=locals.userdata.interests%>">
+                  <input id="tags" class="tags" name="interests" type="text" placeholder="Interests" value="<%=locals.userdata.interests%>">
                   <script type="text/javascript">
-                    $('#interests').tagsInput();
+                    $('.tags').tagsInput();
                   </script>
                 </div>
               </div>
-              <!-- 5th row: submit button -->
+              <!-- Submit button -->
               <div class="row uniform 50%">
                 <div class="12u">
                   <ul class="actions">
