@@ -49,7 +49,10 @@
                 </div>
                 <div class="6u 12u(mobilep)">
                   <a>Interests</a>
-                  <input name="interests" type="text" placeholder="Interests" value="<%=locals.userdata.interests%>">
+                  <input id="interests" class="tags" name="interests" type="text" placeholder="Interests" value="<%=locals.userdata.interests%>">
+                  <script type="text/javascript">
+                    $('#interests').tagsInput();
+                  </script>
                 </div>
               </div>
               <!-- 5th row: submit button -->
