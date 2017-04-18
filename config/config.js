@@ -349,7 +349,7 @@ module.exports = function (app, host, port, sessionSecret) {
 
       // Admin page
       app.get('/admin', stormpath.getUser, loadAllEvents, loadAllEventTypes, function(req, res) {
-        if(res.locals.user.username == "duc158" || "enrico" || "gabriel") {
+        if(res.locals.user.username == "duc158" || "enrico" || "gabrielsarahashi1") {
           res.render('admin');
         } else {
           res.redirect('/');
