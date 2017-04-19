@@ -37,7 +37,7 @@
 										<tr>
 											<td class="8u">
 												<header>
-													<h4><a href="event/<%=event._id%>"><%=event.name%></a></h4>
+													<h4><a href="/event/<%=event._id%>"><%=event.name%></a></h4>
 													<p><%=event.place%> on <%=event.day%> at <%=event.time%></p>
 												</header>
 												Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %></a></br>
@@ -71,7 +71,7 @@
 											<tr>
 											<td class="8u">
 												<header>
-													<h4><a href="event/<%=event._id%>"><%=event.name%></a></h4>
+													<h4><a href="/event/<%=event._id%>"><%=event.name%></a></h4>
 													<p><%=event.place%> on <%=event.day%> at <%=event.time%></p>
 												</header>
 												Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %></a></br>
@@ -98,7 +98,7 @@
 											<tr>
 											<td class="8u">
 												<header>
-													<h4><a href="event/<%=event._id%>"><%=event.name%></a></h4>
+													<h4><a href="/event/<%=event._id%>"><%=event.name%></a></h4>
 													<p><%=event.place%> on <%=event.day%> at <%=event.time%></p>
 												</header>
 												Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %></a></br>

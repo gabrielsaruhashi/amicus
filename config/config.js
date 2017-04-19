@@ -289,7 +289,7 @@ module.exports = function (app, host, port, sessionSecret) {
     		}
     		else {
     			eventToRemove.remove();
-    			res.redirect('/');
+    			res.redirect('back');
     		}
     	});
 
@@ -314,7 +314,7 @@ module.exports = function (app, host, port, sessionSecret) {
           eventToJoin.member_username.push(res.locals.user.username);
           eventToJoin.member_name.push(res.locals.user.fullName);
           eventToJoin.save();
-          res.redirect('/');
+          res.redirect('back');
         }
       });
       Users.findOne({username:res.locals.user.username}, function (err,userdata) {
@@ -333,13 +333,13 @@ module.exports = function (app, host, port, sessionSecret) {
       Event.findById(req.params.id, function(err, eventToJoin) {
         if(err || !eventToJoin) {
           console.log('Error finding task on database.');
-          res.redirect('/');
+          res.redirect('back');
         }
         else {
           eventToJoin.member_username.pull(res.locals.user.username);
           eventToJoin.member_name.pull(res.locals.user.fullName);
           eventToJoin.save();
-          res.redirect('/');
+          res.redirect('back');
         }
       });
 
