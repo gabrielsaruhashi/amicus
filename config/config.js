@@ -71,6 +71,25 @@ const eventType = require('./models/event_type.js');
     );
   }
 
+  // Load user interests
+  function loadUsersProfile(req, res, next) {
+    if(!res.locals.user) {
+      return next();
+    }
+    Users.find({ $or:[
+      {username: res.locals.user.username},
+    ]}, function(err, profile) {
+        if(!err) {
+          res.locals.user.profile = profile;
+        }
+        else {
+          res.redirect('/');
+        }
+        next();
+      }
+    );
+  }
+
 function addNewUser(account, req, res, next){
 
       var newUser = new Users();
@@ -148,7 +167,7 @@ module.exports = function (app, host, port, sessionSecret) {
 
   }));
 
-  app.get('/', stormpath.getUser, loadAllEvents, loadAllEventTypes, function(req, res) {
+  app.get('/', stormpath.getUser, loadAllEvents, loadAllEventTypes, loadUsersProfile, function(req, res) {
     res.render('index');
   });
 
