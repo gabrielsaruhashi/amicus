@@ -62,27 +62,7 @@ const eventType = require('./models/event_type.js');
 		]}, function(err, userevent) {
         if(!err) {
           res.locals.userevent = userevent;
-        }
-        else {
-          res.redirect('/');
-        }
-        next();
-      }
-    );
-  }
-
-  // Load user interests
-  function loadUsersProfile(req, res, next) {
-    if(!res.locals.user) {
-      return next();
-    }
-    Users.find({ $or:[
-      {username: res.locals.user.username},
-    ]}, function(err, profile) {
-        if(!err) {
-          res.locals.user.profile = profile;
-        }
-        else {
+        } else {
           res.redirect('/');
         }
         next();
@@ -167,8 +147,17 @@ module.exports = function (app, host, port, sessionSecret) {
 
   }));
 
-  app.get('/', stormpath.getUser, loadAllEvents, loadAllEventTypes, loadUsersProfile, function(req, res) {
-    res.render('index');
+  app.get('/', stormpath.getUser, loadAllEvents, loadAllEventTypes, function(req, res) {
+    // Load extra user data
+    Users.findOne({username:res.locals.user.username}, function (err, userdata) {
+      if (!err) {
+        res.locals.userdata = userdata;
+        res.render('index');
+      } else {
+        console.log('Error');
+      }
+    });
+
   });
 
   // User

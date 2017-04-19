@@ -66,7 +66,9 @@
 							<tbody>
 								<% event.forEach(function(event) { %>
 									<% if (event.feature==0) {%>
-										<tr>
+										<!-- Events that fits with users' interests will be displayed first -->
+										<% if (userdata.interests.includes(event.type)) { %>
+											<tr>
 											<td class="8u">
 												<header>
 													<h4><a href="event/<%=event._id%>"><%=event.name%></a></h4>
@@ -86,6 +88,34 @@
 												<% } %>
 											</td>
 										</tr>
+										<% } %>
+									<% } %>
+								<% }); %>
+								<% event.forEach(function(event) { %>
+									<% if (event.feature==0) {%>
+										<!-- Events that fits with users' interests will be displayed first -->
+										<% if (!userdata.interests.includes(event.type)) { %>
+											<tr>
+											<td class="8u">
+												<header>
+													<h4><a href="event/<%=event._id%>"><%=event.name%></a></h4>
+													<p><%=event.place%> on <%=event.day%> at <%=event.time%></p>
+												</header>
+												Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %></a></br>
+												<%=event.member_name.length%> Joined.
+												<%for (i = 0; i < event.member_name.length; i++){%><a href="/<%=event.member_username[i]%>/profile"><%=event.member_name[i]%></a><%if (i !=  event.member_name.length - 1) { %>, <% } } %>
+											</td>
+											<td class="2u">
+												<% if (event.owner_id == user.href) { %>
+													<a href="/event/delete/<%=event.id%>" class="button special fit icon fa-trash">Delete</a>
+												<% } else if (event.member_username.indexOf(user.username) > -1 ) { %>
+													<a href="/event/withdraw/<%=event.id%>" class="button fit icon fa-sign-out">Withdraw</a>
+												<% } else { %>
+													<a href="/event/join/<%=event.id%>" class="button special fit icon fa-star">Join</a>
+												<% } %>
+											</td>
+										</tr>
+										<% } %>
 									<% } %>
 								<% }); %>
 							</tbody>
