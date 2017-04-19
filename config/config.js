@@ -149,15 +149,19 @@ module.exports = function (app, host, port, sessionSecret) {
 
   app.get('/', stormpath.getUser, loadAllEvents, loadAllEventTypes, function(req, res) {
     // Load extra user data
-    Users.findOne({username:res.locals.user.username}, function (err, userdata) {
-      if (!err) {
-        res.locals.userdata = userdata;
+    if(!res.locals.user){
         res.render('index');
-      } else {
-        console.log('Error');
-      }
-    });
-
+    }
+    else {
+      Users.findOne({username:res.locals.user.username}, function (err, userdata) {
+        if (!err) {
+          res.locals.userdata = userdata;
+          res.render('index');
+        } else {
+          console.log('Error');
+        }
+      });
+    }
   });
 
   // User
