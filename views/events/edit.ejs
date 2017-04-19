@@ -1,0 +1,89 @@
+<% include ../partials/header.ejs %>
+
+  <% if (locals.user) { %>
+
+    <section class="container">
+      <div class="row">
+        <div class="12u">
+          <section class="box">
+            <h3>Edit Event</h3>
+            <form method="post" action="/event/edit/<%=event._id%>">
+            <fieldset>
+              <div class="row uniform 50%">
+                <div class="6u 12u(mobilep)">
+                  <input type="text" name="name" placeholder="Event name" value="<%=event.name%>">
+                </div>
+                <div class="6u 12u(mobilep)">
+                  <div class="select-wrapper">
+                    <select name="type" id="type">
+                      <option value="">- Event Type -</option>
+                      <% types.forEach(function(types) { %>
+                        <option <% if(types.name == event.type) { %> selected = "selected" <% } %>><%=types.name%></option>
+                      <% }); %>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row uniform 50%">
+                <div class="12u">
+                  <input type="text" name="description" placeholder="Description" value="<%=event.description%>">
+                </div>
+              </div>
+              <div class="row uniform 50%">
+                <div class="6u 12u(mobilep)">
+                  <input type="text" name="place" placeholder="Place" value="<%=event.place%>">
+                </div>
+                <div class="6u 12u(mobilep)">
+                  <input class="datepicker" name="day" type="text" value="Pick a date" value="<%=event.day%>">
+                    <script type="text/javascript">
+                      $( '.datepicker' ).pickadate({
+                        formatSubmit: 'yyyy/mm/dd',
+                        closeOnSelect: false,
+                        closeOnClear: false,
+                      })
+                      var picker = $input.pickadate('picker')
+                    </script>
+                </div>
+              </div>
+              <div class="row uniform 50%">
+                <div class="6u 12u(mobilep) input-group bootstrap-timepicker timepicker">
+                  <input class="timepicker" type="text" name="timeStart" placeholder="Start time" value="<%=event.timeStart%>">
+                  <script type="text/javascript">
+                    $( '.timepicker' ).pickatime({
+                      formatSubmit: 'hh:mm',
+                      closeOnSelect: false,
+                      closeOnClear: false,
+                    })
+                    var picker = $input.pickatime('picker')
+                  </script>
+                </div>
+                <div class="6u 12u(mobilep) input-group bootstrap-timepicker timepicker">
+                  <input class="timepicker" type="text" name="timeEnd" placeholder="End time" value="<%=event.timeEnd%>">
+                  <script type="text/javascript">
+                    $( '.timepicker' ).pickatime({
+                      formatSubmit: 'hh:mm',
+                      closeOnSelect: false,
+                      closeOnClear: false,
+                    })
+                    var picker = $input.pickatime('picker')
+                  </script>
+                </div>
+              </div>
+              <div class="row uniform 50%">
+                <div class="12u">
+                  <ul class="actions">
+                    <li>
+                      <input type="submit" class="button">
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+          </section>
+        </div>
+      </div>
+    </section>
+  <% } %>
+
+<% include ../partials/footer.ejs %>

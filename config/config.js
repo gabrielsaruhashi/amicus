@@ -283,6 +283,45 @@ module.exports = function (app, host, port, sessionSecret) {
 
     });
 
+    // Edit event details
+    app.get('/event/edit/:id', stormpath.getUser, loadAllEventTypes, function(req, res) {
+
+      Event.findById(req.params.id, function(err, event) {
+        if(err || !event) {
+          console.log('Error finding task on database.');
+          res.redirect('/');
+        }
+        else {
+          res.locals.event = event;
+          res.render('events/edit');
+        }
+      });
+
+    });
+
+    app.post('/event/edit/:id', stormpath.getUser, loadAllEventTypes, function(req, res) {
+
+      Event.findById(req.params.id, function(err, event) {
+        if(err || !event) {
+          console.log('Error finding task on database.');
+          res.redirect('/');
+        }
+        else {
+          event.name = req.body.name;
+          event.type = req.body.type;
+          event.description = req.body.description;
+          event.place = req.body.place;
+          event.day = req.body.day;
+          event.timeStart = req.body.timeStart;
+          event.timeEnd = req.body.timeEnd;
+          event.save();
+          res.locals.event = event;
+          res.render('events/edit');
+        }
+      });
+
+    });
+
     // Delete an event
     app.get('/event/delete/:id', stormpath.getUser, function(req, res) {
 
