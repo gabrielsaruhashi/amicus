@@ -51,6 +51,22 @@ const eventType = require('./models/event_type.js');
     );
   }
 
+  // Load all active events
+  function loadActiveEvents(req, res, next) {
+    if(!res.locals.user) {
+      return next();
+    }
+    Event.find( { isCompleted: false }, function(err, activeEvent) {
+        if(!err) {
+          res.locals.event = activeEvent;
+        } else {
+          res.redirect('/');
+        }
+        next();
+      }
+    );
+  }
+
   // Load all events that the user created
   function loadUserEvents(req, res, next) {
     if(!res.locals.user) {
@@ -70,35 +86,36 @@ const eventType = require('./models/event_type.js');
     );
   }
 
-function addNewUser(account, req, res, next){
+  // function add new user extra info
+  function addNewUser(account, req, res, next){
 
-  var newUser = new Users();
-  newUser.username = account.username;
-  newUser.firstname = account.givenName;
-  newUser.lastname = account.surname;
-  newUser.email = account.email;
-  newUser.college = "";
-  newUser.classyear = "";
-  newUser.phone = "";
-  newUser.interests = "";
-  var today = new Date();
-  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  var dateTime = date+' '+time;
-  newUser.last_login = dateTime;
-  newUser.events_joined = 0;
-  newUser.events_created = 0;
+    var newUser = new Users();
+    newUser.username = account.username;
+    newUser.firstname = account.givenName;
+    newUser.lastname = account.surname;
+    newUser.email = account.email;
+    newUser.college = "";
+    newUser.classyear = "";
+    newUser.phone = "";
+    newUser.interests = "";
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
+    newUser.last_login = dateTime;
+    newUser.events_joined = 0;
+    newUser.events_created = 0;
 
-  newUser.save(function(err, userdata){
+    newUser.save(function(err, userdata){
 
-      if(err || !userdata) {
-        console.log('Error saving task to the database.');
-  		} else {
-  		  console.log('New User: '+userdata.username);
-  		}
-  });
-  next();
-}
+        if(err || !userdata) {
+          console.log('Error saving task to the database.');
+    		} else {
+    		  console.log('New User: '+userdata.username);
+    		}
+    });
+    next();
+  }
 
 module.exports = function (app, host, port, sessionSecret) {
 
@@ -147,7 +164,7 @@ module.exports = function (app, host, port, sessionSecret) {
 
   }));
 
-  app.get('/', stormpath.getUser, loadAllEvents, loadAllEventTypes, function(req, res) {
+  app.get('/', stormpath.getUser, loadActiveEvents, loadAllEventTypes, function(req, res) {
     // Load extra user data
     if(!res.locals.user){
         res.render('index');
