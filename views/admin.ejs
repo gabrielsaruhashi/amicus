@@ -54,9 +54,28 @@
 								</td>
 								<td>
 									<form method="post" action="/event/feature/<%=event.id%>">
-										<button type="submit" name="feature" class="button special icon fa-thumb-tack">
-											<% if (event.feature==0) { %> Feature <% } else {%> Unfeature <%}%>
-										</button>
+										<% if (event.feature==0) { %>
+											<button type="submit" class="button special icon fa-thumb-tack">
+												Feature
+											</button>
+										<% } else {%>
+											<button type="submit" class="button icon fa-thumb-tack">
+												Unfeature
+											</button>
+										<%}%>
+									</form>
+								</td>
+								<td>
+									<form method="post" action="/event/complete/<%=event.id%>">
+										<% if (event.isCompleted==0) { %>
+											<button type="submit" class="button icon fa-flag">
+												Complete
+											</button>
+										<% } else {%>
+											<button type="submit" class="button special icon fa-flag">
+												Uncomplete
+											</button>
+										<%}%>
 									</form>
 								</td>
 							</tr>

@@ -246,6 +246,7 @@ module.exports = function (app, host, port, sessionSecret) {
       newEvent.place = req.body.place;
       newEvent.time = req.body.time;
       newEvent.feature = 0;
+      newEvent.isCompleted = 0;
 
       newEvent.save(function(err, event){
 
@@ -442,5 +443,18 @@ module.exports = function (app, host, port, sessionSecret) {
 
       });
 
+      // Complete an event
+      app.post('/event/complete/:id', stormpath.getUser, function(req, res) {
 
+        Event.findById(req.params.id, function(err, completedEvent) {
+          if(err || !completedEvent) {
+            console.log('Error finding event on database.');
+            res.redirect('/admin');
+          }
+          else {
+            completedEvent.completeEvent();
+            res.redirect('/admin');
+          }
+        });
+      });
 }

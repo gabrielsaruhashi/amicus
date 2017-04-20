@@ -23,6 +23,19 @@ const EventSchema = new Schema({
   member_username: [String],
   member_name: [String],
   feature: Boolean,
+  isCompleted: Boolean,
 });
+
+//This method will be responsible for task completion.
+EventSchema.methods.completeEvent = function(err) {
+	if(!err) {
+		this.isCompleted = !(this.isCompleted);
+		this.save();
+	}
+	else {
+		console.log('Error completing an event.');
+	}
+	return;
+};
 
 module.exports = mongoose.model('Events', EventSchema);
