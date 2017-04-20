@@ -311,7 +311,12 @@ module.exports = function (app, host, port, sessionSecret) {
         }
         else {
           res.locals.event = event;
-          res.render('events/edit');
+          if (event.owner_username == res.locals.user.username || "duc158" || "enrico" || "gabrielsarahashi1") {
+            res.render('events/edit');
+          } else {
+            res.redirect ('/event/' + req.params.id);
+          }
+
         }
       });
 
