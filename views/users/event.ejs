@@ -13,7 +13,7 @@
 											<td class="8u">
 												<header>
 													<h4><a href="/event/<%=event._id%>"><%=event.name%></a></h4>
-													<p><%=event.place%> on <%=event.day%> at <%=event.time%></p>
+													<p><%=event.place%> on <%=event.day%> at <%=event.timeStart%></p>
 												</header>
 												Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %></a></br>
 												<%=event.member_name.length%> Joined.
@@ -34,7 +34,7 @@
       <% } else { %>
         You did not create or joined any event.
       <% } %>
-      
+
 							</tbody>
 						</table>
 					</div>

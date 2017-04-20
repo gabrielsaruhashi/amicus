@@ -3,18 +3,25 @@
   <% if (locals.user) { %>
 
     <section class="container">
-      <section id="welcome" class="box">
-        <div class="col-sm-12">
+      <section class="box">
           <!-- Event detail -->
           <header>
             <h3><%=event.name%></h3>
-            <p><%=event.place%> on <%=event.day%> at <%=event.time%></p>
+            <p><%=event.place%> on <%=event.day%> at <%=event.timeStart%></p>
           </header>
           <p><%=event.description%></p>
-          <p>Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.username == user.username) { %> You <% } else { %> <%=event.owner%> <% } %></a></p>
-          <p><%=event.member_name.length%> Joined.
-          <%for (i = 0; i < event.member_name.length; i++){%><a href="/<%=event.member_username[i]%>/profile"><%=event.member_name[i]%></a><%if (i !=  event.member_name.length - 1) { %>, <% } } %></p>
-        </div>
+          <p>
+            Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.username == user.username) { %> You <% } else { %> <%=event.owner%> <% } %></a></br>
+            <%=event.member_name.length%> Joined. <%for (i = 0; i < event.member_name.length; i++){%><a href="/<%=event.member_username[i]%>/profile"><%=event.member_name[i]%></a><%if (i !=  event.member_name.length - 1) { %>, <% } } %></p>
+          <div class="2u">
+            <% if (event.owner_id == user.href) { %>
+              <a href="/event/delete/<%=event.id%>" class="button special fit icon fa-trash">Delete</a>
+            <% } else if (event.member_username.indexOf(user.username) > -1 ) { %>
+              <a href="/event/withdraw/<%=event.id%>" class="button fit icon fa-sign-out">Withdraw</a>
+            <% } else { %>
+              <a href="/event/join/<%=event.id%>" class="button special fit icon fa-star">Join</a>
+            <% } %>
+          </div>
       </section>
     </section>
   <% } %>
