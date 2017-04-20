@@ -72,32 +72,32 @@ const eventType = require('./models/event_type.js');
 
 function addNewUser(account, req, res, next){
 
-      var newUser = new Users();
-      newUser.username = account.username;
-      newUser.firstname = account.givenName;
-      newUser.lastname = account.surname;
-      newUser.email = account.email;
-      newUser.college = "";
-      newUser.classyear = "";
-      newUser.phone = "";
-      newUser.interests = "";
-      var today = new Date();
-      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      var dateTime = date+' '+time;
-      newUser.last_login = dateTime;
-      newUser.events_joined = 0;
-      newUser.events_created = 0;
+  var newUser = new Users();
+  newUser.username = account.username;
+  newUser.firstname = account.givenName;
+  newUser.lastname = account.surname;
+  newUser.email = account.email;
+  newUser.college = "";
+  newUser.classyear = "";
+  newUser.phone = "";
+  newUser.interests = "";
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var dateTime = date+' '+time;
+  newUser.last_login = dateTime;
+  newUser.events_joined = 0;
+  newUser.events_created = 0;
 
-      newUser.save(function(err, userdata){
+  newUser.save(function(err, userdata){
 
-          if(err || !userdata) {
-            console.log('Error saving task to the database.');
-      		} else {
-      		  console.log('New User: '+userdata.username);
-      		}
-      });
-      next();
+      if(err || !userdata) {
+        console.log('Error saving task to the database.');
+  		} else {
+  		  console.log('New User: '+userdata.username);
+  		}
+  });
+  next();
 }
 
 module.exports = function (app, host, port, sessionSecret) {
@@ -131,19 +131,19 @@ module.exports = function (app, host, port, sessionSecret) {
     },
     postRegistrationHandler: addNewUser,
     postLoginHandler: function (account, req, res, next) {
-    Users.findOne({username:account.username}, function (err,userdata) {
-      if(err || !userdata) {
-            console.log('Error saving task to the database.');
-      }
-      var today = new Date();
-      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      var dateTime = date+' '+time;
-      userdata.last_login = dateTime;
-      userdata.save();
-    next();
-    });
-  }
+      Users.findOne({username:account.username}, function (err,userdata) {
+        if(err || !userdata) {
+          console.log('Error saving task to the database.');
+        }
+        const today = new Date();
+        const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        const dateTime = date+' '+time;
+        userdata.last_login = dateTime;
+        userdata.save();
+        next();
+      });
+    }
 
   }));
 
