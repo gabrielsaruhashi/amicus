@@ -164,12 +164,13 @@ module.exports = function (app, host, port, sessionSecret) {
 
   }));
 
+  // Homepage
   app.get('/', stormpath.getUser, loadActiveEvents, loadAllEventTypes, function(req, res) {
-    // Load extra user data
     if(!res.locals.user){
         res.render('index');
     }
     else {
+      // Load extra user data
       Users.findOne({username:res.locals.user.username}, function (err, userdata) {
         if (!err) {
           res.locals.userdata = userdata;
@@ -180,6 +181,24 @@ module.exports = function (app, host, port, sessionSecret) {
       });
     }
   });
+
+    // By Type
+    app.get('/search/type/:keyword', stormpath.getUser, function(req, res) {
+      if(!res.locals.user){
+        res.redirect('/');
+      }
+      else {
+        // return the events matching the requested type
+        Event.find({ type: req.params.keyword }, function(err, searchedEvents) {
+            if(!err) {
+              res.locals.searchedEvents = searchedEvents;
+              res.render('search');
+            } else {
+              res.redirect('/');
+            }
+        });
+      }
+    });
 
   // User
 
