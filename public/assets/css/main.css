@@ -2806,12 +2806,12 @@
 	}
 
 	#header {
-		background: #444;
+		background: rgba(80,227,194,0.9);
 		color: #bbb;
 		cursor: default;
-		height: 3.25em;
+		height: 4.25em;
 		left: 0;
-		line-height: 3.25em;
+		line-height: 4.5em;
 		position: fixed;
 		top: 0;
 		width: 100%;
@@ -2865,6 +2865,7 @@
 						line-height: 1.95em;
 						padding: 0 1em;
 						border-radius: 6px;
+						font-size: 16px;
 					}
 
 					#header nav > ul > li a:not(.button) {
@@ -2897,7 +2898,7 @@
 		#header input[type="button"],
 		#header .button {
 			background-color: transparent;
-			box-shadow: inset 0 0 0 2px #999;
+			box-shadow: inset 0 0 0 2px #fff;
 			color: #fff;
 		}
 
@@ -3036,6 +3037,7 @@
 /* Banner */
 
 	#banner {
+		height: 600px;
 		background-attachment: scroll,							fixed;
 		background-color: #666;
 		background-image: url("images/overlay.png"), url("../../images/banner_new2.png");
@@ -3775,4 +3777,12 @@
 		#profileel {
 		color: #e89980;
 		text-decoration: none;
+	}
+
+	#logo {
+		width: 205px;
+	}
+
+	#logo-banner {
+		width: 400px;
 	}
