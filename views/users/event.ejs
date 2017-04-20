@@ -28,6 +28,45 @@
 													<a href="/event/join/<%=event.id%>" class="button special fit icon fa-star">Join</a>
 												<% } %>
 											</td>
+					            <td class="2u">
+						            <!-- 2. Include script -->
+						            <script type="text/javascript">
+						            	(function () {
+				                    if (window.addtocalendar)if(typeof window.addtocalendar.start == "function")return;
+				                    if (window.ifaddtocalendar == undefined) { window.ifaddtocalendar = 1;
+				                        var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+				                        s.type = 'text/javascript';s.charset = 'UTF-8';s.async = true;
+				                        s.src = ('https:' == window.location.protocol ? 'https' : 'http')+'://addtocalendar.com/atc/1.5/atc.min.js';
+				                        var h = d[g]('body')[0];h.appendChild(s); }})();
+						            </script>
+						            <!-- 3. Place event data -->
+					              <span class="addtocalendar atc-style-button-icon">
+								        <a class="atcb-link button special icon fa-calendar">Add to Calendar</a>
+								        <var class="atc_event">
+								        		<% 
+								            var date1 = new Date (event.day);
+								            date1.setHours(event.timeStart.match(/^(\d+)/)[1], event.timeStart.match(/:(\d+)/)[1], 0);
+								            var date2 = new Date (event.day);
+								            date2.setHours(event.timeEnd.match(/^(\d+)/)[1], event.timeEnd.match(/:(\d+)/)[1], 0);
+								            var AMPM1 = event.timeStart.match(/\s(.*)$/)[1];
+								            var AMPM2 = event.timeEnd.match(/\s(.*)$/)[1];
+														if(AMPM1 == "PM" && date1.getHours() <12) date1.setHours(date1.getHours() + 12);
+														if(AMPM1 == "AM" && date1.getHours() ==12) date1.setHours(date1.getHours() - 12);
+														if(AMPM2 == "PM" && date2.getHours() <12) date2.setHours(date2.getHours() + 12);
+														if(AMPM2 == "AM" && date2.getHours() ==12) date2.setHours(date2.getHours() - 12);
+														var sdate1 = date1.getFullYear()+"-"+(date1.getMonth()+1)+"-"+date1.getDate()+" "+date1.getHours()+":"+date1.getMinutes()+":"+date1.getSeconds();
+								            var sdate2 = date2.getFullYear()+"-"+(date2.getMonth()+1)+"-"+date2.getDate()+" "+date2.getHours()+":"+date2.getMinutes()+":"+date2.getSeconds();
+								            %>
+								            <var class="atc_date_start"><%=sdate1%></var>
+								            <var class="atc_date_end"><%=sdate2%></var>
+								            <var class="atc_timezone">America/New_York</var>
+								            <var class="atc_title"><%=event.name%></var>
+								            <var class="atc_description"><%=event.description%></var>
+								            <var class="atc_location"><%=event.place%></var>
+								            <var class="atc_organizer"><%=event.owner%></var>
+								        </var>
+								    		</span>
+					            </td>
 										</tr>
           <% }); %>
         </ul>
