@@ -6,26 +6,7 @@
 		<section class="container">
 			<section id="eventFeature" class="box">
 
-				<!-- Highlighted Categories -->
-				<div class="box alt">
-					<div class="row no-collapse 50% uniform">
-						<div class="4u">
-							<span class="image fit">
-								<img src="/images/today.png" alt=""/>
-							</span>
-						</div>
-						<div class="4u">
-							<span class="image fit">
-								<img src="/images/movie.png" alt=""/>
-							</span>
-						</div>
-						<div class="4u">
-							<span class="image fit">
-								<img src="/images/basketball.png" alt=""/>
-							</span>
-						</div>
-					</div>
-				</div>
+				<% include ./partials/highlight.ejs %>
 
 				<% if (locals.searchedEvents) { %>
 					<div class="tabel-wrapper">

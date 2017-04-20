@@ -443,7 +443,7 @@ module.exports = function (app, host, port, sessionSecret) {
       // Admin page
       app.get('/admin', stormpath.getUser, loadAllEvents, loadAllEventTypes, function(req, res) {
         if(res.locals.user.username == "duc158" || "enrico" || "gabrielsarahashi1") {
-          res.render('admin');
+          res.render('admin/admin');
         } else {
           res.redirect('/');
         }
@@ -459,7 +459,8 @@ module.exports = function (app, host, port, sessionSecret) {
 
           if(event && !err){
             if(err || !event) {
-        			res.render('/admin', { errors: 'Error saving task to the database.'} );
+        			console.log('Error saving event type to the database.');
+              res.redirect('/admin');
         		} else {
         			res.redirect('/admin');
         		}
