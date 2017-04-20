@@ -280,7 +280,8 @@ module.exports = function (app, host, port, sessionSecret) {
       newEvent.description = req.body.description;
       newEvent.day = req.body.day;
       newEvent.place = req.body.place;
-      newEvent.time = req.body.time;
+      newEvent.timeStart = req.body.timeStart;
+      newEvent.timeEnd = req.body.timeEnd;
       newEvent.feature = 0;
       newEvent.isCompleted = 0;
 
