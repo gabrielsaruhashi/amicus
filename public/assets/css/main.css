@@ -2619,7 +2619,7 @@
 		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		background-color: #666;
+		background-color: rgba(34, 35, 38, 0.8);
 		border-radius: 6px;
 		border: 0;
 		color: #ffffff;
@@ -2806,7 +2806,7 @@
 	}
 
 	#header {
-		background: rgba(80,227,194,0.9);
+		background: rgba(34, 35, 38, 0.9);
 		color: #bbb;
 		cursor: default;
 		height: 4.25em;
@@ -3786,3 +3786,42 @@
 	#logo-banner {
 		width: 400px;
 	}
+
+	#video-landing {
+		text-align: center;
+		height: 500px;
+		position: relative;
+		overflow-y: hidden;
+		color: white;
+	}
+
+	#video-landing p {
+		font-size: 2rem;
+		margin: 0 0 1em 0;
+	}
+
+	#video-landing video {
+		position: absolute;
+		min-height: 100%;
+		min-width: 100%;
+		top: -200px;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		z-index: -100;
+	}
+
+	#video-text {
+		margin-top: 6rem;
+	}
+
+	#video-text ul{
+		font-size: 1.1rem;
+	}
+
+	#video-text .button{
+		letter-spacing:2px;
+		background-color: #ff4632;
+	}
+
+	
