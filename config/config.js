@@ -200,6 +200,23 @@ module.exports = function (app, host, port, sessionSecret) {
       }
     });
 
+    // By Date
+    app.get('/search/date/:keyword', stormpath.getUser, function(req, res) {
+      if(!res.locals.user){
+        res.redirect('/');
+      }
+      else {
+        // return the events matching the requested type
+        Event.find({ day: req.params.keyword }, function(err, searchedEvents) {
+            if(!err) {
+              res.locals.searchedEvents = searchedEvents;
+              res.render('search');
+            } else {
+              res.redirect('/');
+            }
+        });
+      }
+    });
   // User
 
     // Show the profile page

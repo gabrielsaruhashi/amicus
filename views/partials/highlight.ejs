@@ -3,7 +3,15 @@
   <div class="row no-collapse 50% uniform">
     <div class="4u">
       <span class="image fit">
-        <img src="/images/today.png" alt=""/>
+        <%
+          var monthNames = ["January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"];
+          var today = new Date();
+          var query = today.getDate() +"%20"+ monthNames[today.getMonth()]+",%20" + today.getFullYear();
+        %>
+        <a href="/search/date/<%=query%>">
+          <img src="/images/today.png" alt=""/>
+        </a>
       </span>
     </div>
     <div class="4u">
