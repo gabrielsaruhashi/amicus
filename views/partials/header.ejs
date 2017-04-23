@@ -55,15 +55,22 @@
 									<li style="white-space: nowrap;"><a href="/<%=locals.user.username%>/event" style="display: block;">My Events</a></li>
 								</ul>
 							</li>
-							<li>
-								<form action="/event/create" method="get">
+							<li style="white-space: nowrap;">
+								<a href="/event/create" class="button special">Create Event</a>
+								<!-- <form action="/event/create" method="get" style="display:">
 									<input class="button special" type="submit" value="Create Event"/>
-								</form>
+								</form> -->
 							</li>
 							<li style="white-space: nowrap;">
-								<form action="/logout" method="post">
+								<a href="#logout" id="logout" class="button special">Log Out</a>
+								<form id="formLogout" action="/logout" method="post" style="display: none">
 									<input class="button special" type="submit" value="Sign Out"/>
 								</form>
+								<script type="text/javascript" >
+									$("#logout").click(function(e) {
+										$("#formLogout").submit();
+									});
+								</script>
 							</li>
 						<% } else { %>
 							<li style="white-space: nowrap;"><a href="/login" class="button">Login</a></li>
