@@ -67,7 +67,7 @@
 											</td>
 											<td class="2u">
 													<% if (event.owner_id == user.href) { %>
-														<a href="/event/delete/<%=event.id%>" class="button special fit icon fa-trash">Delete</a>
+														<a href="/event/delete/<%=event.id%>" class="button alt fit icon fa-trash">Delete</a>
 													<% } else if (event.member_username.indexOf(user.username) > -1 ) { %>
 														<a href="/event/withdraw/<%=event.id%>" class="button fit icon fa-sign-out">Withdraw</a>
 													<% } else { %>
@@ -98,7 +98,7 @@
 												</td>
 											<td class="2u">
 												<% if (event.owner_id == user.href) { %>
-													<a href="/event/delete/<%=event.id%>" class="button special fit icon fa-trash">Delete</a>
+													<a href="/event/delete/<%=event.id%>" class="button alt fit icon fa-trash">Delete</a>
 												<% } else if (event.member_username.indexOf(user.username) > -1 ) { %>
 													<a href="/event/withdraw/<%=event.id%>" class="button fit icon fa-sign-out">Withdraw</a>
 												<% } else { %>

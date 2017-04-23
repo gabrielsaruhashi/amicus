@@ -12,7 +12,8 @@
 					<table>
 						<tbody>
 							<% searchedEvents.forEach(function(event) { %>
-								<tr>
+								<% if (event.isCompleted == 0) { %>
+									<tr>
 									<td class="8u">
 										<header>
 											<h4><a href="/event/<%=event._id%>"><%=event.name%></a></h4>
@@ -32,6 +33,7 @@
 										<% } %>
 									</td>
 								</tr>
+								<% } %>
 							<% }); %>
 						</tbody>
 					</table>
