@@ -47,15 +47,22 @@
                   <input name="phone" type="text" placeholder="Phone Number" value="<%=locals.userdata.phone%>">
                 </div>
               </div>
-              <!-- 5th row: Interests -->
+              <!-- 5th row: Interests and Free days -->
               <div class="row uniform 50%">
-                <div class="12u">
+                <!-- Interests as tags -->
+                <div class="6u 12u(mobilep)">
                   <a>Interests</a>
-                  <input id="tags" class="tags" name="interests" type="text" placeholder="Interests" value="<%=locals.userdata.interests%>">
-                  <script type="text/javascript">
-                    $('.tags').tagsInput();
-                  </script>
+                  <input class="tags" name="interests" type="text" value="<%=locals.userdata.interests%>">
                 </div>
+                <!-- Free days as tags -->
+                <div class="6u 12u(mobilep)">
+                  <a>Free Days in the Week (Monday, Tuesday etc.)</a>
+                  <input class="tags" name="freeDays" type="text" value="<%=locals.userdata.freeDays%>">
+                </div>
+                <!-- Activate the tags input type -->
+                <script type="text/javascript">
+                  $('.tags').tagsInput();
+                </script>
               </div>
               <!-- Submit button -->
               <div class="row uniform 50%">

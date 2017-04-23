@@ -98,6 +98,7 @@ const eventType = require('./models/event_type.js');
     newUser.classyear = "";
     newUser.phone = "";
     newUser.interests = "";
+    newUser.freeDays = "";
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -254,6 +255,7 @@ module.exports = function (app, host, port, sessionSecret) {
             userdata.classyear = req.body.classyear;
             userdata.phone = req.body.phone;
             userdata.interests = req.body.interests;
+            userdata.freeDays = req.body.freeDays;
             userdata.save();
             res.locals.userdata = userdata;
             res.render('users/profile', {'userid':req.body.username});

@@ -18,6 +18,7 @@ const UserSchema = new Schema({
   classyear: stringField,
   phone: stringField,
   interests: stringField,
+  freeDay: stringField,
   last_login: stringField,
   events_joined: Number,
   events_created: Number
