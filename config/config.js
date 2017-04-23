@@ -167,12 +167,12 @@ module.exports = function (app, host, port, sessionSecret) {
 
   // Homepage
   app.get('/', stormpath.getUser, loadActiveEvents, loadAllEventTypes, function(req, res) {
-    if(!res.locals.user){
+    if(!req.user){
         res.render('index');
     }
     else {
       // Load extra user data
-      Users.findOne({username:res.locals.user.username}, function (err, userdata) {
+      Users.findOne({username: req.user.username}, function (err, userdata) {
         if (!err) {
           res.locals.userdata = userdata;
           res.render('index');

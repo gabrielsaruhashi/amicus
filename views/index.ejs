@@ -44,45 +44,14 @@
 						</table>
 					</div>
 
-					<!-- Non-Featured events -->
+					<!-- Non-featured yet matched events -->
 					<div class="tabel-wrapper">
 						<table>
 							<tbody>
 								<% event.forEach(function(event) { %>
-									<% if (event.feature==0) {%>
+									<% if (event.feature==0 && userdata.interests && userdata.freeDay) {%>
 										<!-- Events that fits with users' interests will be displayed first -->
 										<% if (userdata.interests.includes(event.type) || userdata.freeDay.includes(event.day)) { %>
-										<tr>
-											<td class="8u">
-												<header>
-													<span class="image left">
-														<a href="/event/<%=event._id%>"><img height="120px" src="images/types/<%=event.type%>.png"></a>
-													</span>
-													<a href="/event/<%=event._id%>"><%=event.name%></a>
-													<p><%=event.place%> on <%=event.date%> at <%=event.timeStart%></p>
-												</header>
-												Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %></a></br>
-												<%=event.member_name.length%> Joined.
-												<%for (i = 0; i < event.member_name.length; i++){%><a href="/<%=event.member_username[i]%>/profile"><%=event.member_name[i]%></a><%if (i !=  event.member_name.length - 1) { %>, <% } } %>
-											</td>
-											<td class="2u">
-													<% if (event.owner_id == user.href) { %>
-														<a href="/event/delete/<%=event.id%>" class="button alt fit icon fa-trash">Delete</a>
-													<% } else if (event.member_username.indexOf(user.username) > -1 ) { %>
-														<a href="/event/withdraw/<%=event.id%>" class="button fit icon fa-sign-out">Withdraw</a>
-													<% } else { %>
-														<a href="/event/join/<%=event.id%>" class="button special fit icon fa-star">Join</a>
-													<% } %>
-											</td>
-										</tr>
-										<% } %>
-									<% } %>
-								<% }); %>
-
-								<% event.forEach(function(event) { %>
-									<% if (event.feature==0) {%>
-										<!-- Events that fits with users' interests will be displayed first -->
-										<% if (!userdata.interests.includes(event.type)) { %>
 											<tr>
 												<td class="8u">
 													<header>
@@ -96,23 +65,22 @@
 													<%=event.member_name.length%> Joined.
 													<%for (i = 0; i < event.member_name.length; i++){%><a href="/<%=event.member_username[i]%>/profile"><%=event.member_name[i]%></a><%if (i !=  event.member_name.length - 1) { %>, <% } } %>
 												</td>
-											<td class="2u">
-												<% if (event.owner_id == user.href) { %>
-													<a href="/event/delete/<%=event.id%>" class="button alt fit icon fa-trash">Delete</a>
-												<% } else if (event.member_username.indexOf(user.username) > -1 ) { %>
-													<a href="/event/withdraw/<%=event.id%>" class="button fit icon fa-sign-out">Withdraw</a>
-												<% } else { %>
-													<a href="/event/join/<%=event.id%>" class="button special fit icon fa-star">Join</a>
-												<% } %>
-											</td>
-										</tr>
+												<td class="2u">
+														<% if (event.owner_id == user.href) { %>
+															<a href="/event/delete/<%=event.id%>" class="button alt fit icon fa-trash">Delete</a>
+														<% } else if (event.member_username.indexOf(user.username) > -1 ) { %>
+															<a href="/event/withdraw/<%=event.id%>" class="button fit icon fa-sign-out">Withdraw</a>
+														<% } else { %>
+															<a href="/event/join/<%=event.id%>" class="button special fit icon fa-star">Join</a>
+														<% } %>
+												</td>
+											</tr>
 										<% } %>
 									<% } %>
 								<% }); %>
 							</tbody>
 						</table>
 					</div>
-
 				<% } %>
 			</section>
 		</section>
