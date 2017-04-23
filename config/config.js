@@ -208,7 +208,7 @@ module.exports = function (app, host, port, sessionSecret) {
       }
       else {
         // return the events matching the requested type
-        Event.find({ day: req.params.keyword }, function(err, searchedEvents) {
+        Event.find({ date: req.params.keyword }, function(err, searchedEvents) {
             if(!err) {
               res.locals.searchedEvents = searchedEvents;
               res.render('search');
@@ -297,7 +297,7 @@ module.exports = function (app, host, port, sessionSecret) {
       newEvent.name = req.body.name;
       newEvent.type = req.body.type;
       newEvent.description = req.body.description;
-      newEvent.day = req.body.day;
+      newEvent.date = req.body.date;
       newEvent.place = req.body.place;
       newEvent.timeStart = req.body.timeStart;
       newEvent.timeEnd = req.body.timeEnd;
@@ -373,7 +373,7 @@ module.exports = function (app, host, port, sessionSecret) {
           event.type = req.body.type;
           event.description = req.body.description;
           event.place = req.body.place;
-          event.day = req.body.day;
+          event.date = req.body.date;
           event.timeStart = req.body.timeStart;
           event.timeEnd = req.body.timeEnd;
           event.save();

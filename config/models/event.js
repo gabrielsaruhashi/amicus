@@ -18,6 +18,7 @@ const EventSchema = new Schema({
   description: stringField,
   place: stringField,
   day: stringField,
+  date: stringField,
   timeStart: stringField,
   timeEnd: stringField,
   member_username: [String],
