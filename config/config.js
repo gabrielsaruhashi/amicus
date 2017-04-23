@@ -298,6 +298,8 @@ module.exports = function (app, host, port, sessionSecret) {
       newEvent.type = req.body.type;
       newEvent.description = req.body.description;
       newEvent.date = req.body.date;
+      var d = new Date(req.body.date);
+      newEvent.day = d.toLocaleString ('en-us', {weekday:'long'});
       newEvent.place = req.body.place;
       newEvent.timeStart = req.body.timeStart;
       newEvent.timeEnd = req.body.timeEnd;
@@ -374,6 +376,8 @@ module.exports = function (app, host, port, sessionSecret) {
           event.description = req.body.description;
           event.place = req.body.place;
           event.date = req.body.date;
+          var d = new Date(req.body.date);
+          event.day = d.toLocaleString ('en-us', {weekday:'long'});
           event.timeStart = req.body.timeStart;
           event.timeEnd = req.body.timeEnd;
           event.save();

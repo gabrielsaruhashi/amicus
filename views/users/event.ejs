@@ -13,7 +13,7 @@
 											<td class="8u">
 												<header>
 													<h4><a href="/event/<%=event._id%>"><%=event.name%></a></h4>
-													<p><%=event.place%> on <%=event.day%> at <%=event.timeStart%></p>
+													<p><%=event.place%> on <%=event.date%> at <%=event.timeStart%></p>
 												</header>
 												Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.owner_id == user.href) { %> You <% } else { %> <%=event.owner%> <% } %></a></br>
 												<%=event.member_name.length%> Joined.
@@ -43,10 +43,10 @@
 					              <span class="addtocalendar atc-style-button-icon">
 								        <a class="atcb-link button special icon fa-calendar">Add to Calendar</a>
 								        <var class="atc_event">
-								        		<% 
-								            var date1 = new Date (event.day);
+								        		<%
+								            var date1 = new Date (event.date);
 								            date1.setHours(event.timeStart.match(/^(\d+)/)[1], event.timeStart.match(/:(\d+)/)[1], 0);
-								            var date2 = new Date (event.day);
+								            var date2 = new Date (event.date);
 								            date2.setHours(event.timeEnd.match(/^(\d+)/)[1], event.timeEnd.match(/:(\d+)/)[1], 0);
 								            var AMPM1 = event.timeStart.match(/\s(.*)$/)[1];
 								            var AMPM2 = event.timeEnd.match(/\s(.*)$/)[1];
