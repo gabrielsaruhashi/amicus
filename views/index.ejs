@@ -51,7 +51,7 @@
 								<% event.forEach(function(event) { %>
 									<% if (event.feature==0) {%>
 										<!-- Events that fits with users' interests will be displayed first -->
-										<% if (userdata.interests.includes(event.type)) { %>
+										<% if (userdata.interests.includes(event.type) || userdata.freeDay.includes(event.day)) { %>
 										<tr>
 											<td class="8u">
 												<header>
