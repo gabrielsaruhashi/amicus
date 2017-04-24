@@ -120,7 +120,7 @@ const eventType = require('./models/event_type.js');
 
 module.exports = function (app, host, port, sessionSecret) {
 
-  const adminList = "duc158, enrico, gabrielsarahashi1";
+  const adminList = "duc158, enrico, gabrielsaruhashi1";
 
   // Configure our app
   app.use(cookieParser()); // read cookies (needed for auth)
