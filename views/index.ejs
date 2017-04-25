@@ -8,8 +8,26 @@
 
 				<% include ./partials/highlight.ejs %>
 
+
+				<% if (!userdata.interests || !userdata.freeDay) { %>
+					<script>
+						$(document).ready(function() {
+							swal({
+						  	title: "Update your profile",
+						   	text: "Input your interests and free days in the week to get matched with the right events.",
+								type: "warning",
+								confirmButtonText: "Your profile",
+								showCancelButton: true,
+						  },
+						  function(){
+						      window.location.href = '/<%=userdata.username%>/profile';
+							});
+						});
+					</script>
+				<% } %>
+
 				<% if (locals.event) { %>
-					<div class="tabel-wrapper">
+					<div class="table-wrapper">
 						<!-- Featured and Matched Events -->
 						<table>
 							<tbody>
