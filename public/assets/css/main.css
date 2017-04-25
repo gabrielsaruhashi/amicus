@@ -1895,6 +1895,7 @@
 		font-style: italic;
 		margin: 0 0 2em 0;
 		padding: 0.5em 0 0.5em 2em;
+		font-size: 1.5em;
 	}
 
 	pre {
@@ -2724,7 +2725,7 @@
 		input[type="reset"].special,
 		input[type="button"].special,
 		.button.special {
-			background-color: #e89980;
+			background-color: #ff4632;
 			color: #ffffff !important;
 		}
 
@@ -3823,6 +3824,14 @@
 	#video-text .button{
 		letter-spacing:2px;
 		background-color: #ff4632;
+	}
+
+	#detail-banner {
+		height: 20rem;
+    	width: 40rem;
+    	clip-path: inset(10px 0px 80px 0px);
+    	margin-left: 4.75rem;
+    	margin-bottom: -3em;
 	}
 
 	
