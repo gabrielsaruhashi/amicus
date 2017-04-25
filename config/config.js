@@ -136,7 +136,8 @@ module.exports = function (app, host, port, sessionSecret) {
             username: {
               enabled: true
             }
-          }
+          },
+          fieldOrder: ['username', 'email', 'password', 'givenName', 'surname']
         }
       }
     },
