@@ -40,11 +40,20 @@
                   <input name="classyear" type="text" placeholder="Class Year" value="<%=locals.userdata.classyear%>">
                 </div>
               </div>
-              <!-- 4th row: phone and interests -->
+              <!-- 4th row: phone and work for us -->
               <div class="row uniform 50%">
                 <div class="6u 12u(mobilep)">
                   <a>Phone Number</a>
                   <input name="phone" type="text" placeholder="Phone Number" value="<%=locals.userdata.phone%>">
+                </div>
+                <div class="6u 12u(mobilep)">
+                  <a>Interested in working with us?</a>
+                  <div class="select-wrapper">
+                    <select name="workforus">
+                      <option <% if (locals.userdata.workforus == "No") { %> selected="selected" <% } %>>No</option>
+                      <option <% if (locals.userdata.workforus == "Yes") { %> selected="selected" <% } %>>Yes</option>
+                    </select>
+                  </div>
                 </div>
               </div>
               <!-- 5th row: Interests and Free days -->

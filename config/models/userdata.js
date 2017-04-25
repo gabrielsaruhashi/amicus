@@ -17,6 +17,7 @@ const UserSchema = new Schema({
   college: stringField,
   classyear: stringField,
   phone: stringField,
+  workforus: stringField,
   interests: stringField,
   freeDay: stringField,
   last_login: stringField,

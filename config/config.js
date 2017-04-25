@@ -257,6 +257,7 @@ module.exports = function (app, host, port, sessionSecret) {
             userdata.college = req.body.college;
             userdata.classyear = req.body.classyear;
             userdata.phone = req.body.phone;
+            userdata.workforus = req.body.workforus;
             userdata.interests = req.body.interests;
             userdata.freeDay = req.body.freeDay;
             userdata.save();
