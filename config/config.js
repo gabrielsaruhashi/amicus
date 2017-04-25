@@ -120,6 +120,8 @@ const eventType = require('./models/event_type.js');
 
 module.exports = function (app, host, port, sessionSecret) {
 
+  const adminList = "duc158, enrico, gabrielsaruhashi1";
+
   // Configure our app
   app.use(cookieParser()); // read cookies (needed for auth)
   app.use(bodyParser.json()); // get information from html forms
@@ -168,12 +170,12 @@ module.exports = function (app, host, port, sessionSecret) {
 
   // Homepage
   app.get('/', stormpath.getUser, loadActiveEvents, loadAllEventTypes, function(req, res) {
-    if(!res.locals.user){
+    if(!req.user){
         res.render('index');
     }
     else {
       // Load extra user data
-      Users.findOne({username:res.locals.user.username}, function (err, userdata) {
+      Users.findOne({username: req.user.username}, function (err, userdata) {
         if (!err) {
           res.locals.userdata = userdata;
           res.render('index');
@@ -353,7 +355,7 @@ module.exports = function (app, host, port, sessionSecret) {
         }
         else {
           res.locals.event = event;
-          if (event.owner_username == res.locals.user.username || "duc158" || "enrico" || "gabrielsarahashi1") {
+          if ( event.owner_username == req.user.username ) {
             res.render('events/edit');
           } else {
             res.redirect ('/event/' + req.params.id);
@@ -467,7 +469,7 @@ module.exports = function (app, host, port, sessionSecret) {
 
       // Admin page
       app.get('/admin', stormpath.getUser, loadAllEvents, loadAllEventTypes, function(req, res) {
-        if(res.locals.user.username == "duc158" || "enrico" || "gabrielsarahashi1") {
+        if( adminList.indexOf( req.user.username ) > -1) {
           res.render('admin/admin');
         } else {
           res.redirect('/');
