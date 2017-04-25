@@ -4,14 +4,19 @@
 
     <section class="container">
       <section class="box">
-
+          <div class="row uniform 50%">
+            <div class="4u">
+              <span class="image fit">
+                <img src="/images/<%=event.type%>.png"/>
+              </span>
+            </div>
+          </div>
           <!-- Event detail -->
           <header>
-            <img src="/images/<%=event.type%>.png" id="detail-banner"/>
             <h3><%=event.name%></h3>
-            <p><%=event.place%> on <%=event.date%> from <%=event.timeStart%> to <%=event.timeEnd%></p>
+            <%=event.place%> on <%=event.date%> from <%=event.timeStart%> to <%=event.timeEnd%>
           </header>
-          <blockquote><%=event.description%></blockquote>
+          <%=event.description%>
           <p>
             Organized: <a href="/<%=event.owner_username%>/profile"><% if (event.username == user.username) { %> You <% } else { %> <%=event.owner%> <% } %></a></br>
             <%=event.member_name.length%> Joined. <%for (i = 0; i < event.member_name.length; i++){%><a href="/<%=event.member_username[i]%>/profile"><%=event.member_name[i]%></a><%if (i !=  event.member_name.length - 1) { %>, <% } } %></p>
