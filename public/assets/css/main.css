@@ -2401,7 +2401,13 @@
 				display: block;
 				width: 100%;
 				height: 9rem;
+				-webkit-filter: brightness(100%);
 			}
+
+			.image.fit img:hover {
+				-webkit-filter: brightness(70%);
+			}
+
 
 /* List */
 
