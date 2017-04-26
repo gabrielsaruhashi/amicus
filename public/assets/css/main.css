@@ -3830,6 +3830,12 @@
 	#video-text .button{
 		letter-spacing:2px;
 		background-color: #ff4632;
+		-webkit-filter: brightness(100%);
+	}
+
+	#video-text .button:hover{
+		-webkit-filter: brightness(90%);
+
 	}
 
 	#detail-banner {
@@ -3839,5 +3845,7 @@
     	margin-left: 4.75rem;
     	margin-bottom: -3em;
 	}
+
+
 
 	
